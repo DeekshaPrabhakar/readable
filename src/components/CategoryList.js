@@ -12,7 +12,7 @@ class CategoryList extends Component {
                         {categories.map((category) => (
                             <li key={category.path} className="book-grid">
                                 <Link to={{
-                                    pathname: '/' + category.path,
+                                    pathname: '/category/' + category.path,
                                     state: { category: category.path }
                                 }}>
                                     {category.name}

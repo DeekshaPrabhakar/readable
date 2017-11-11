@@ -16,14 +16,16 @@ body {
 
 
 .App-header nav,
-.main {
+.main,
+.categoryView {
     max-width: 80%;
     margin: 0 auto;
     padding: 10px;
 }
 
 .App-header nav ul,
-.main ul {
+.main ul,
+.categoryView ul {
   list-style: none;
 }
 
@@ -129,3 +131,7 @@ body {
   font-weight: bold;
 }
 
+
+.categoryView ul {
+  width: 100%;
+}

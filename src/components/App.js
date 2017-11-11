@@ -6,6 +6,7 @@ import pencil from '../images/pencil.png';
 import '../App.css';
 import * as ReadableAPI from '../ReadableAPI';
 import Home from './Home';
+import Category from './Category';
 
 class App extends Component {
 
@@ -48,9 +49,16 @@ class App extends Component {
                     </nav>
                 </header>
                 <Switch>
-                    {/* Index page shows only 10 books. To see all books, go to the shelf detail page */}
+                    {/* Root page shows categories and all posts */}
                     <Route exact path="/" render={props => (
                         <Home categories={this.state.categories} posts={this.state.posts}  {...props} />
+                    )} />
+
+                    {/* Category view */}
+                    <Route path="/category/" render={props => (
+                        <section className="mainContent">
+                            <Category posts={this.state.posts}  {...props} />
+                        </section>
                     )} />
                 </Switch>
 
