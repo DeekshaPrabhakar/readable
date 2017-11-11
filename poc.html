@@ -1,0 +1,204 @@
+<html>
+
+<head>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #fafafa;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        header,
+        footer {
+            background-color: #fff;
+        }
+
+        #pageBg,
+        header nav,
+        footer p {
+            max-width: 80%;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        header nav li { display: inline-block; width: 49%; }
+
+        li.logo { text-align: left; }
+        li.edit { text-align: right; }
+        li.edit a { font-size: 1.4em;
+            text-decoration: none;
+            color: #CA0035;}
+
+        .logo a {
+            font-size: 2em;
+            text-decoration: none;
+            color: #CA0035;
+        }
+
+        .logo img {
+            vertical-align: middle;
+            margin-right: 12px
+        }
+
+        .edit img {
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        footer p {
+            text-align: center;
+        }
+
+        #pageBg ul,
+        header ul {
+            list-style: none;
+        }
+
+        .categories {
+            display: inline-block;
+            width: 150px;
+        }
+
+        .categories h3 {
+            border-bottom: 1px solid #aaa;
+            padding: 8px 8px 8px 0;
+        }
+
+        .categories ul li {
+            padding: 4px 0;
+        }
+
+        #main {
+            display: inline-block;
+            width: 80%;
+            vertical-align: top;
+            margin-left: 20px;
+        }
+
+        .postSection {
+            padding: 10px;
+            background-color: #fff;
+            margin: 10px 0;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+
+        .excerpt {
+            margin-top: 10px;
+            line-height: 1.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li class="logo">
+                    <a href="#">
+                        <img src="public/logo64.png" />Readable</a>
+                </li>
+                <li class="edit">
+                        <a href="#">
+                            <img src="public/pencil.png" />Post</a>
+                    </li>
+            </ul>
+        </nav>
+    </header>
+    <div id="pageBg">
+        <aside class="categories">
+            <h3>Categories</h3>
+            <nav>
+                <ul>
+                    <li>react
+                    </li>
+                    <li>redux
+                    </li>
+                    <li>udacity
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <section id="main">
+            <div class="postSection">
+                <div class="post">
+                    <h3>
+                        How to pass props to {this.props.children}
+                    </h3>
+                    <div class="excerpt">
+                        I'm trying to find the proper way to define some components which could be used in a generic way:
+                        <Parent>
+                            <Child value="1">
+                                <Child value="2">
+                        </Parent>
+                        There is a logic ...
+                    </div>
+                </div>
+            </div>
+            <div class="postSection">
+                <div class="post">
+                    <h3>
+                        Programmatically navigate using react router
+                    </h3>
+                    <div class="excerpt">
+                        With react-router I can use the Link element to create links that are natively handled by react router. I see internally
+                        it calls this.context.transitionTo(...). I want to do a navigation, but not ...
+                    </div>
+                </div>
+            </div>
+            <div class="postSection">
+                <div class="post">
+                    <h3>
+                        React.js inline style best practices
+                    </h3>
+                    <div class="excerpt">
+                        I'm aware that you can specify styles within React classes, like this: var MyDiv = React.createClass({ render: function()
+                        { var style = { color: 'white', fontSize: 200 }; ...
+                    </div>
+                </div>
+            </div>
+            <div class="postSection">
+                <div class="post">
+                    <h3>
+                        What is the difference between using constructor vs getInitialState in React / React Native?
+                    </h3>
+                    <div class="excerpt">
+                        I've seen both used interchangeably. What are the main use cases for both? Are there advantages / disadvantages? Is one a
+                        better practice?
+                    </div>
+                </div>
+            </div>
+            <div class="postSection">
+                <div class="post">
+                    <h3>
+                        Why do we need middleware for async flow in Redux?
+                    </h3>
+                    <div class="excerpt">
+                        According to the docs, "Without middleware, Redux store only supports synchronous data flow". I don't understand why this
+                        is the case. Why can't the container component call the async API, and then ...
+                    </div>
+                </div>
+            </div>
+            <div class="postSection">
+                <div class="post">
+                    <h3>
+                        Pros/cons of using redux-saga with ES6 generators vs redux-thunk with ES2017 async/await
+                    </h3>
+                    <div class="excerpt">
+                        There is a lot of talk about the latest kid in redux town right now, yelouafi/redux-saga. It uses generator functions for
+                        listening to/dispatching actions. Before I wrap my head around it, I would ...
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2017 Made with &hearts; by Deeksha Prabhakar</p>
+    </footer>
+</body>
+
+</html>
