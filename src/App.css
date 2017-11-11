@@ -78,10 +78,18 @@ body {
 .categories h3 {
   border-bottom: 1px solid #aaa;
   padding: 8px 8px 8px 0;
+  color: #CA0035;
+  font-size: 1.4em;
+  margin-bottom: 6px;
 }
 
 
 .categories ul li {
   padding: 4px 0;
+}
+
+.categories ul li a {
+  text-decoration: none;
+  color: #56B9D0;
 }
 

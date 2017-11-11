@@ -5,6 +5,7 @@ import logo from '../images/logo64.png';
 import pencil from '../images/pencil.png';
 import '../App.css';
 import * as ReadableAPI from '../ReadableAPI';
+import Categories from './Categories';
 
 class App extends Component {
 
@@ -39,23 +40,7 @@ class App extends Component {
                     </nav>
                 </header>
                 <div className="main">
-                    <aside class="categories">
-                        <h3>Categories</h3>
-                        <nav>
-                            <ul>
-                                {categories.map((category) => (
-                                    <li key={category.path} className="book-grid">
-                                        <Link to={{
-                                            pathname: '/' + category.path,
-                                            state: { category: category.path }
-                                        }}>
-                                            {category.name}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </nav>
-                    </aside>
+                    <Categories categories={this.state.categories} />
                 </div>
             </div>
         );
