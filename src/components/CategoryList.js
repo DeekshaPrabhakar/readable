@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class Categories extends Component {
+class CategoryList extends Component {
     render() {
         const categories = this.props.categories;
         return (
@@ -26,4 +26,4 @@ class Categories extends Component {
     }
 }
 
-export default Categories;
+export default CategoryList;

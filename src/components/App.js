@@ -5,12 +5,13 @@ import logo from '../images/logo64.png';
 import pencil from '../images/pencil.png';
 import '../App.css';
 import * as ReadableAPI from '../ReadableAPI';
-import Categories from './Categories';
+import Home from './Home';
 
 class App extends Component {
 
     state = {
-        categories: []
+        categories: [],
+        posts: []
     }
 
     componentDidMount() {
@@ -20,10 +21,17 @@ class App extends Component {
                 categories: categories
             })
         })
+
+        ReadableAPI.getAllPosts().then((posts) => {
+            this.setState({
+                posts: posts
+            })
+        })
     }
 
     render() {
-        const categories = this.state.categories;
+        const categories = this.state.categories
+        const posts = this.state.posts
 
         return (
             <div className="App">
@@ -39,9 +47,13 @@ class App extends Component {
                         </ul>
                     </nav>
                 </header>
-                <div className="main">
-                    <Categories categories={this.state.categories} />
-                </div>
+                <Switch>
+                    {/* Index page shows only 10 books. To see all books, go to the shelf detail page */}
+                    <Route exact path="/" render={props => (
+                        <Home categories={this.state.categories} posts={this.state.posts}  {...props} />
+                    )} />
+                </Switch>
+
             </div>
         );
     }

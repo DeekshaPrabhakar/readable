@@ -78,8 +78,7 @@ body {
 .categories h3 {
   border-bottom: 1px solid #aaa;
   padding: 8px 8px 8px 0;
-  color: #CA0035;
-  font-size: 1.4em;
+  font-size: 1.2em;
   margin-bottom: 6px;
 }
 
@@ -88,8 +87,45 @@ body {
   padding: 4px 0;
 }
 
+
 .categories ul li a {
   text-decoration: none;
-  color: #56B9D0;
+  color: #333;
+}
+
+
+.postSection {
+  display: inline-block;
+  width: 80%;
+  vertical-align: top;
+  margin-left: 20px;
+  background: #fff;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+}
+
+
+.post {
+  padding: 3px;
+  margin: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+
+.post a {
+  color: #000;
+  text-decoration: none;
+}
+
+
+.excerpt {
+  margin-top: 10px;
+  line-height: 1.5em;
+}
+
+
+.postTitle {
+  font-weight: bold;
 }
 
