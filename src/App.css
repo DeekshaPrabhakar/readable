@@ -1,28 +1,87 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+
+body {
+  background-color: #fafafa;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+  background-color: #fff;
 }
 
-.App-title {
-  font-size: 1.5em;
+
+.App-header nav,
+.main {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 10px;
 }
 
-.App-intro {
-  font-size: large;
+.App-header nav ul,
+.main ul {
+  list-style: none;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.App-header nav li {
+  display: inline-block; 
+  width: 49%;
 }
+
+
+.App-header li.logo {
+  text-align: left; 
+}
+
+
+.App-header li.edit {
+  text-align: right;
+}
+
+
+.App-header li.edit a { 
+  font-size: 1.4em;
+  text-decoration: none;
+  color: #CA0035;
+}
+
+
+.App-header .logo a {
+  font-size: 2em;
+  text-decoration: none;
+  color: #CA0035;
+}
+
+
+.App-header .logo img {
+  vertical-align: middle;
+  margin-right: 12px
+}
+
+
+.App-header .edit img {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+
+.categories {
+  display: inline-block;
+  width: 150px;
+}
+
+
+.categories h3 {
+  border-bottom: 1px solid #aaa;
+  padding: 8px 8px 8px 0;
+}
+
+
+.categories ul li {
+  padding: 4px 0;
+}
+
