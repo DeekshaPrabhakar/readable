@@ -18,7 +18,9 @@ body {
 .App-header nav,
 .main,
 .categoryView,
-.postDetail {
+.postDetail,
+.editDiv,
+.no-match {
     max-width: 80%;
     margin: 0 auto;
     padding: 10px;
@@ -139,7 +141,8 @@ body {
 }
 
 
-.postDetail {
+.postDetail,
+.editDiv {
   background-color: #fff;
   margin-top: 10px;
   border: 1px solid #eee;
@@ -166,4 +169,58 @@ body {
 
 .commentBody {
   font-size: 0.8em;
+}
+
+
+.editdetails input,
+.editdetails textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: block
+}
+
+
+.editdetails button, 
+.editdetails a.closeEdit {
+  margin-top: 20px;
+  padding: 10px;
+  text-transform: uppercase;
+  font-size: 1em;
+  display: inline-block;
+  width: 100px;
+  background: #eee;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  margin-right: 10px; 
+}
+
+
+.editform {
+  padding: 10px;
+  width: 80%;
+}
+
+.no-match {
+  text-align: center;
+  font-size: 4em;
+  padding: 50px;
+  color: #56B9D0;
+  margin-top: 20px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  background-color: #fff;
+  width: 70%;
+}
+
+
+.no-match span, 
+.error-label  {
+  color: #CA0035;
 }

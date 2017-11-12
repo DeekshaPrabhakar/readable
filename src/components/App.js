@@ -8,6 +8,8 @@ import * as ReadableAPI from '../ReadableAPI';
 import Home from './Home';
 import Category from './Category';
 import PostDetail from './PostDetail';
+import EditPost from './EditPost';
+import NoMatch from './NoMatch';
 
 class App extends Component {
 
@@ -62,12 +64,18 @@ class App extends Component {
                         </section>
                     )} />
 
-                     {/* Post Detail view */}
-                     <Route path="/posts/" render={props => (
+                    {/* Post Detail view */}
+                    <Route path="/posts/" render={props => (
                         <section className="mainContent">
                             <PostDetail  {...props} />
                         </section>
                     )} />
+
+                    {/* create/edit post */}
+                    <Route path="/edit" render={({ history }) => (
+                        <EditPost />
+                    )} />
+                    <Route component={NoMatch} />
                 </Switch>
 
             </div>
