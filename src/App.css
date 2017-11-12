@@ -224,3 +224,6 @@ body {
 .error-label  {
   color: #CA0035;
 }
+
+.tag { display: inline-block; margin-right: 24px;  }
+.tag input[type="checkbox"] { width: 25px; display: inline-block; }

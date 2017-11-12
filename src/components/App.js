@@ -18,6 +18,12 @@ class App extends Component {
         posts: []
     }
 
+    editPost(post){
+        ReadableAPI.createPost(post).then(post => {
+            console.log(post)
+        })
+    }
+
     componentDidMount() {
 
         ReadableAPI.getCategories().then((categories) => {
@@ -42,10 +48,10 @@ class App extends Component {
                 <header className="App-header">
                     <nav>
                         <ul>
-                            <li class="logo">
+                            <li className="logo">
                                 <Link to="/"><img src={logo} className="App-logo" alt="logo" />Readable</Link>
                             </li>
-                            <li class="edit">
+                            <li className="edit">
                                 <Link to="/edit"><img src={pencil} className="App-logo" alt="logo" />Post</Link>
                             </li>
                         </ul>
@@ -73,7 +79,10 @@ class App extends Component {
 
                     {/* create/edit post */}
                     <Route path="/edit" render={({ history }) => (
-                        <EditPost />
+                        <EditPost categories={this.state.categories} onEditPost={(post) => {
+                            this.editPost(post)
+                            history.push('/')
+                        }}  />
                     )} />
                     <Route component={NoMatch} />
                 </Switch>
