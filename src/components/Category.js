@@ -5,8 +5,6 @@ import Posts from './Posts';
 class Category extends Component {
     render() {
         const category = this.props.location.state.category;
-        console.log(category);
-
         const posts = this.props.posts.filter(post => post.category === category)
 
         return (

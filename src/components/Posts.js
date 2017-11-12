@@ -9,7 +9,7 @@ class Posts extends Component {
                 {posts.map((post) => (
                     <li key={post.id} className="post">
                         <Link to={{
-                            pathname: '/' + post.id,
+                            pathname: '/posts/' + post.id,
                             state: { post: post }
                         }}>
                             <p className="postTitle">

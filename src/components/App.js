@@ -7,6 +7,7 @@ import '../App.css';
 import * as ReadableAPI from '../ReadableAPI';
 import Home from './Home';
 import Category from './Category';
+import PostDetail from './PostDetail';
 
 class App extends Component {
 
@@ -58,6 +59,13 @@ class App extends Component {
                     <Route path="/category/" render={props => (
                         <section className="mainContent">
                             <Category posts={this.state.posts}  {...props} />
+                        </section>
+                    )} />
+
+                     {/* Post Detail view */}
+                     <Route path="/posts/" render={props => (
+                        <section className="mainContent">
+                            <PostDetail  {...props} />
                         </section>
                     )} />
                 </Switch>
