@@ -100,22 +100,30 @@ body {
 }
 
 
-.postSection {
+.postsDiv {
   display: inline-block;
   width: 80%;
   vertical-align: top;
   margin-left: 20px;
-  background: #fff;
   padding: 10px;
-  border: 1px solid #eee;
-  border-radius: 3px;
 }
 
+.sortPosts {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.sortPosts span {
+  font-size: 0.8em;
+  color: #222;
+}
 
 .post {
-  padding: 3px;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 3px;
   margin: 10px 0;
-  border-bottom: 1px solid #eee;
 }
 
 
@@ -154,6 +162,11 @@ body {
   margin-bottom: 12px;
 }
 
+.postCategory {
+  color: #56B9D0;
+  font-weight: bold;
+  text-transform: uppercase;
+}
 
 .comments {
   margin: 16px 0;

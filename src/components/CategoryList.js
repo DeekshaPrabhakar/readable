@@ -5,7 +5,7 @@ class CategoryList extends Component {
     render() {
         const categories = this.props.categories;
         return (
-            <aside class="categories">
+            <aside className="categories">
                 <h3>Categories</h3>
                 <nav>
                     <ul>

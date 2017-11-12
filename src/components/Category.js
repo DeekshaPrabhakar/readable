@@ -9,7 +9,7 @@ class Category extends Component {
 
         return (
             <div className="categoryView">
-                <Posts posts={posts} />
+                <Posts updatePosts={this.props.updatePosts} posts={posts} />
             </div>
         );
     }

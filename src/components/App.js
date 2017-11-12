@@ -18,10 +18,50 @@ class App extends Component {
         posts: []
     }
 
-    editPost(post){
+    editPost(post) {
         ReadableAPI.createPost(post).then(post => {
             console.log(post)
         })
+    }
+
+    updatePosts = (sortBy) => {
+        const posts = this.state.posts
+        switch (sortBy) {
+            case "timestampDesc":
+                posts.sort((a, b) => {
+                    return (new Date(a.timestamp) < new Date(b.timestamp))
+                })
+                this.setState({
+                    posts: posts
+                })
+                break;
+            case "timestampAsc":
+                posts.sort((a, b) => {
+                    return (new Date(a.timestamp) > new Date(b.timestamp))
+                })
+                this.setState({
+                    posts: posts
+                })
+                break;
+            case "voteDesc":
+                posts.sort((a, b) => {
+                    return (parseInt(b.voteScore) - parseInt(a.voteScore))
+                })
+                this.setState({
+                    posts: posts
+                })
+                break;
+            case "voteAsc":
+                posts.sort((a, b) => {
+                    return (parseInt(a.voteScore) - parseInt(b.voteScore))
+                })
+                this.setState({
+                    posts: posts
+                })
+                break;
+            default:
+                break;
+        }
     }
 
     componentDidMount() {
@@ -33,6 +73,9 @@ class App extends Component {
         })
 
         ReadableAPI.getAllPosts().then((posts) => {
+            posts.sort((a, b) => {
+                return (parseInt(b.voteScore) - parseInt(a.voteScore))
+            })
             this.setState({
                 posts: posts
             })
@@ -60,13 +103,13 @@ class App extends Component {
                 <Switch>
                     {/* Root page shows categories and all posts */}
                     <Route exact path="/" render={props => (
-                        <Home categories={this.state.categories} posts={this.state.posts}  {...props} />
+                        <Home categories={this.state.categories} posts={this.state.posts} updatePosts={this.updatePosts}  {...props} />
                     )} />
 
                     {/* Category view */}
                     <Route path="/category/" render={props => (
                         <section className="mainContent">
-                            <Category posts={this.state.posts}  {...props} />
+                            <Category posts={this.state.posts} updatePosts={this.updatePosts}  {...props} />
                         </section>
                     )} />
 
@@ -82,7 +125,7 @@ class App extends Component {
                         <EditPost categories={this.state.categories} onEditPost={(post) => {
                             this.editPost(post)
                             history.push('/')
-                        }}  />
+                        }} />
                     )} />
                     <Route component={NoMatch} />
                 </Switch>
