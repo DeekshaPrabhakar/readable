@@ -1,25 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import * as ReadableUtil from '../ReadableUtil';
 
 class Posts extends Component {
-
-    formatDate = (dateString) => {
-        var monthNames = [
-            "Jan", "Feb", "Mar",
-            "Apr", "May", "Jun", "Jul",
-            "Aug", "Sep", "Oct",
-            "Nov", "Dec"
-        ];
-
-        var date = new Date(dateString);
-        var newDate = new Date(date.toISOString());
-
-        var day = newDate.getUTCDate();
-        var monthIndex = newDate.getUTCMonth();
-        var year = newDate.getUTCFullYear();
-
-        return day + ' ' + monthNames[monthIndex] + " " + year;
-    }
 
     render() {
         const posts = this.props.posts
@@ -54,7 +37,7 @@ class Posts extends Component {
                             <div>
                                 <span className="postInfo">
                                     <address>{post.author}</address>
-                                    <time>{this.formatDate(post.timestamp)}</time>
+                                    <time>{ReadableUtil.formatDate(post.timestamp)}</time>
                                 </span>
                                 <span className="postCategory">
                                     {post.category}

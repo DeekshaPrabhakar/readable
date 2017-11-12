@@ -9,6 +9,11 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+button {
+  background: none;
+  border: none;
+}
+
 
 .App-header {
   background-color: #fff;
