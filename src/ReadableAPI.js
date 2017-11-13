@@ -77,3 +77,14 @@ export const votePost = (postId, body) =>
     }).then(res => res.json())
 
 
+    //upvote or downvote a comment
+export const voteComment = (commentId, body) =>
+fetch(`${api}/comments/${commentId}`, {
+    method: 'POST',
+    headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+}).then(res => res.json())
+

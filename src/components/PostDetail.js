@@ -6,9 +6,6 @@ import deletePost from '../images/deletePost.png'
 import editPost from '../images/editPost.png'
 import profile from '../images/profile.png'
 import user from '../images/user.png'
-import like from '../images/like.png'
-import dislike from '../images/dislike.png'
-import comment from '../images/comment.png'
 import Comment from './Comment'
 
 class PostDetail extends Component {
@@ -42,10 +39,8 @@ class PostDetail extends Component {
         })
     }
 
-
     render() {
         const post = this.props.location.state.post
-        console.log(post)
         const comments = this.state.comments
 
         return (
@@ -56,7 +51,7 @@ class PostDetail extends Component {
                 <div className="postInfo">
                     <span className="profileAuthor">
                         <span className="profileImage">
-                            <img src={post.author === "Deeksha Prabhakar" ? profile : user} />
+                            <img alt="profile icon" src={post.author === "Deeksha Prabhakar" ? profile : user} />
                         </span>
                         <span className="author">
                             <address>{post.author}</address>
@@ -99,7 +94,9 @@ class PostDetail extends Component {
                     <div className="comments">
                         <h4>{comments.length > 1 ? comments.length + " Comments" : comments.length + " Comment"}</h4>
                         {comments.map((comment) => (
-                            <Comment comment={comment}></Comment>
+                            <div key={comment.id}>
+                                <Comment comment={comment}></Comment>
+                            </div>
                         ))}
                     </div>
                 )}

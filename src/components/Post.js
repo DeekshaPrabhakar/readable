@@ -15,7 +15,7 @@ class Post extends Component {
                 </p>
                 <div className="postInfo">
                     <span className="profileImage">
-                        <img src={post.author === "Deeksha Prabhakar" ? profile : user} />
+                        <img alt="profile icon" src={post.author === "Deeksha Prabhakar" ? profile : user} />
                     </span>
                     <span className="author">
                         <address>{post.author}</address>
@@ -27,8 +27,8 @@ class Post extends Component {
                 </p>
                 <div className="postCategory">
                     <span className="comment">
-                        <img src={comment} />{post.commentCount}&nbsp;Comments </span>
-                    <span className="voteScore"><img className={post.voteScore < 0 ? "dislike" : ""} src={post.voteScore > 0 ? like : dislike} />{post.voteScore}&nbsp;Votes</span>
+                        <img alt="comment icon" src={comment} />{post.commentCount}&nbsp;Comments </span>
+                    <span className="voteScore"><img alt="like dislike icon" className={post.voteScore < 0 ? "dislike" : ""} src={post.voteScore > 0 ? like : dislike} />{post.voteScore}&nbsp;Votes</span>
                     <span className="category">
                         {post.category}
                     </span>
