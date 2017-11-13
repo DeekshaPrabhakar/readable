@@ -4,6 +4,7 @@ import * as ReadableAPI from '../ReadableAPI';
 import * as ReadableUtil from '../ReadableUtil';
 import voteUp from '../images/voteUp.png';
 import voteDown from '../images/voteDown.png';
+import deletePost from '../images/deletePost.png';
 
 class PostDetail extends Component {
 
@@ -14,6 +15,9 @@ class PostDetail extends Component {
     componentDidMount() {
         const post = this.props.location.state.post
         ReadableAPI.getPostComments(post.id).then(comments => {
+            comments.sort((a, b) => {
+                return (parseInt(b.voteScore) - parseInt(a.voteScore))
+            })
             this.setState({
                 comments: comments
             })
@@ -23,6 +27,12 @@ class PostDetail extends Component {
     increaseDecreaseVote = (isIncrease, postID) => {
         let param = isIncrease ? { option: "upVote" } : { option: "downVote" }
         ReadableAPI.votePost(postID, param).then(post => {
+            console.log(post)
+        })
+    }
+
+    deletePost = (postID) => {
+        ReadableAPI.deletePost(postID).then(post => {
             console.log(post)
         })
     }
@@ -40,6 +50,9 @@ class PostDetail extends Component {
                 <p className="excerpt">
                     {post.body}
                 </p>
+                <button onClick={(e) => this.deletePost(post.id)}>
+                    <img src={deletePost} className="voteIcon" alt="delete icon" />
+                </button>
                 <div>
                     <button onClick={(e) => this.increaseDecreaseVote(true, post.id)}>
                         <img src={voteUp} className="voteIcon" alt="vote up icon" />
