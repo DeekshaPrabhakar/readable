@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class CategoryList extends Component {
     render() {
-        const categories = this.props.categories;
+        const categories = this.props.categories
         return (
             <aside className="categories">
                 <h3>Categories</h3>

@@ -1,40 +1,53 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import serializeForm from 'form-serialize'
-const uuidv1 = require('uuid/v1');
+const uuidv1 = require('uuid/v1')
 
 class EditPost extends Component {
 
-    handleSubmit = (e) => {
+    handleSubmit = (e, isEdit, post) => {
         e.preventDefault()
         const values = serializeForm(e.target, { hash: true })
-        console.log(values)
-        const postId = uuidv1()
-        values.id = postId
+
+        if (!isEdit) {
+            const postId = uuidv1()
+            values.id = postId
+        }else{
+            values.id = post.id
+        }
+
         values.timestamp = Date.now()
         values.deleted = false
+
+        console.log(values)
+
         if (this.props.onEditPost) {
-            this.props.onEditPost(values)
+            this.props.onEditPost(values, isEdit)
         }
     }
 
     render() {
         const categories = this.props.categories
+        const isEdit = (this.props.location && this.props.location.state) ? true : false
+        const post = isEdit ? this.props.location.state.post : {}
+
         return (
             <div className="editDiv">
-                <form onSubmit={this.handleSubmit} className="editform">
+                <form onSubmit={(e) => {
+                    this.handleSubmit(e, isEdit, post)
+                }} className="editform">
                     <div className="editdetails">
-                        <input type="text" name="title" placeholder="Title" />
-                        <textarea name="body" placeholder="Detail" cols="10" rows="5" />
+                        <input type="text" name="title" placeholder="Title" defaultValue={post.title ? post.title : ""} />
+                        <textarea name="body" placeholder="Detail" cols="10" rows="5" defaultValue={post.body ? post.body : ""} />
                         <div className="tags">
                             {categories.map((category) => (
                                 <div key={category.name} className="tag">
-                                    <input type="checkbox" id={category.name} name="category" value={category.name} />
+                                    <input type="checkbox" id={category.name} name="category" value={category.name} defaultChecked={post.category === category.name ? true : false} />
                                     <label htmlFor={category.name}>{category.name}</label>
                                 </div>
                             ))}
                         </div>
-                        <input type="hidden" name="author" value="Deeksha Prabhakar" />
+                        <input type="hidden" name="author" defaultValue={post.author ? post.author : "Deeksha Prabhakar"} />
                         <button>Post</button>
                         <Link className="closeEdit" to="/">Cancel</Link>
                     </div>

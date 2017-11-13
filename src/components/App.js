@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import logo from '../images/logo64.png';
-import pencil from '../images/pencil.png';
-import '../App.css';
-import * as ReadableAPI from '../ReadableAPI';
-import Home from './Home';
-import Category from './Category';
-import PostDetail from './PostDetail';
-import EditPost from './EditPost';
-import NoMatch from './NoMatch';
+import React, { Component } from 'react'
+import { Switch, Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import logo from '../images/logo64.png'
+import pencil from '../images/pencil.png'
+import '../App.css'
+import * as ReadableAPI from '../ReadableAPI'
+import Home from './Home'
+import Category from './Category'
+import PostDetail from './PostDetail'
+import EditPost from './EditPost'
+import NoMatch from './NoMatch'
 
 class App extends Component {
 
@@ -18,10 +18,16 @@ class App extends Component {
         posts: []
     }
 
-    editPost(post) {
-        ReadableAPI.createPost(post).then(post => {
-            console.log(post)
-        })
+    editPost(post, isEdit) {
+        if (isEdit) {
+            ReadableAPI.editPost(post).then(post => {
+                console.log(post)
+            })
+        } else {
+            ReadableAPI.createPost(post).then(post => {
+                console.log(post)
+            })
+        }
     }
 
     updatePosts = (sortBy) => {
@@ -45,7 +51,7 @@ class App extends Component {
                 break;
             case "voteDesc":
                 posts.sort((a, b) => {
-                    return (parseInt(b.voteScore) - parseInt(a.voteScore))
+                    return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
                 })
                 this.setState({
                     posts: posts
@@ -53,7 +59,7 @@ class App extends Component {
                 break;
             case "voteAsc":
                 posts.sort((a, b) => {
-                    return (parseInt(a.voteScore) - parseInt(b.voteScore))
+                    return (parseInt(a.voteScore, 10) - parseInt(b.voteScore, 10))
                 })
                 this.setState({
                     posts: posts
@@ -74,7 +80,7 @@ class App extends Component {
 
         ReadableAPI.getAllPosts().then((posts) => {
             posts.sort((a, b) => {
-                return (parseInt(b.voteScore) - parseInt(a.voteScore))
+                return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
             })
             this.setState({
                 posts: posts
@@ -83,8 +89,6 @@ class App extends Component {
     }
 
     render() {
-        const categories = this.state.categories
-        const posts = this.state.posts
 
         return (
             <div className="App">
@@ -121,11 +125,10 @@ class App extends Component {
                     )} />
 
                     {/* create/edit post */}
-                    <Route path="/edit" render={({ history }) => (
+                    <Route path="/edit" render={(props) => (
                         <EditPost categories={this.state.categories} onEditPost={(post) => {
                             this.editPost(post)
-                            history.push('/')
-                        }} />
+                        }}   {...props} />
                     )} />
                     <Route component={NoMatch} />
                 </Switch>

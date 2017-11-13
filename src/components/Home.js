@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import CategoryList from './CategoryList';
-import Posts from './Posts';
+import React, { Component } from 'react'
+import CategoryList from './CategoryList'
+import Posts from './Posts'
 
 class Home extends Component {
     render() {

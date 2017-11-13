@@ -7,11 +7,13 @@ export const formatDate = (dateString) => {
     ];
 
     var date = new Date(dateString);
-    var newDate = new Date(date.toISOString());
+    if (!isNaN(date.getTime())) {
+        var newDate = new Date(date.toISOString());
 
-    var day = newDate.getUTCDate();
-    var monthIndex = newDate.getUTCMonth();
-    var year = newDate.getUTCFullYear();
+        var day = newDate.getUTCDate();
+        var monthIndex = newDate.getUTCMonth();
+        var year = newDate.getUTCFullYear();
 
-    return day + ' ' + monthNames[monthIndex] + " " + year;
+        return day + ' ' + monthNames[monthIndex] + " " + year;
+    }
 }

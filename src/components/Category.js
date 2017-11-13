@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Posts from './Posts';
+import React, { Component } from 'react'
+import Posts from './Posts'
 
 class Category extends Component {
     render() {

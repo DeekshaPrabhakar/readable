@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import * as ReadableUtil from '../ReadableUtil';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import * as ReadableUtil from '../ReadableUtil'
 
 class Posts extends Component {
 
