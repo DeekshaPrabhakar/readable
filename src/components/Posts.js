@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import * as ReadableUtil from '../ReadableUtil'
-import profile from '../images/profile.png'
-import user from '../images/user.png'
+import Post from './Post'
+
 
 class Posts extends Component {
 
@@ -22,35 +21,19 @@ class Posts extends Component {
 
                     </select>
                 </div>
-                <ul className="postSection">
+                <div className="postSection">
                     {posts.map((post) => (
-                        <li key={post.id} className="post">
+                        <div key={post.id} className="post">
                             <Link to={{
                                 pathname: '/posts/' + post.title.split(' ').join('_'),
                                 state: { post: post }
                             }}>
-                                <p className="postTitle">
-                                    {post.title}
-                                </p>
+                               <Post post={post} />
                             </Link>
-                            <div className="postInfo">
-                                <span className="profileImage">
-                                    <img src={post.author === "Deeksha Prabhakar" ? profile : user} />
-                                </span>
-                                <span className="author">
-                                    <address>{post.author}</address>
-                                    <time>{ReadableUtil.formatDate(post.timestamp)}</time>
-                                </span>
-                            </div>
-                            <p className="excerpt">
-                                {post.body}
-                            </p>
-                            <p className="postCategory">
-                                {post.category}
-                            </p>
-                        </li>
+                           
+                        </div>
                     ))}
-                </ul>
+                </div>
             </div>
         );
     }

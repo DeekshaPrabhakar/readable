@@ -2,10 +2,14 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import * as ReadableAPI from '../ReadableAPI'
 import * as ReadableUtil from '../ReadableUtil'
-import voteUp from '../images/voteUp.png'
-import voteDown from '../images/voteDown.png'
 import deletePost from '../images/deletePost.png'
 import editPost from '../images/editPost.png'
+import profile from '../images/profile.png'
+import user from '../images/user.png'
+import like from '../images/like.png'
+import dislike from '../images/dislike.png'
+import comment from '../images/comment.png'
+import Comment from './Comment'
 
 class PostDetail extends Component {
 
@@ -49,51 +53,57 @@ class PostDetail extends Component {
                 <h3 className="postTitle">
                     {post.title}
                 </h3>
+                <div className="postInfo">
+                    <span className="profileAuthor">
+                        <span className="profileImage">
+                            <img src={post.author === "Deeksha Prabhakar" ? profile : user} />
+                        </span>
+                        <span className="author">
+                            <address>{post.author}</address>
+                            <time>{ReadableUtil.formatDate(post.timestamp)}</time>
+                        </span>
+                    </span>
+                    <span className="postEditControls">
+                        <Link className="editPost" to={{
+                            pathname: '/edit',
+                            state: { post: post }
+                        }}>
+                            <img src={editPost} className="voteIcon" alt="edit icon" />
+                        </Link>
+                        <button className="deletePost" onClick={(e) => this.deletePost(post.id)}>
+                            <img src={deletePost} className="voteIcon" alt="delete icon" />
+                        </button>
+                    </span>
+                </div>
                 <p className="excerpt">
                     {post.body}
                 </p>
-                <Link to={{
-                    pathname: '/edit',
-                    state: { post: post }
-                }}>
-                    <img src={editPost} className="voteIcon" alt="edit icon" />
-                </Link>
-                <button onClick={(e) => this.deletePost(post.id)}>
-                    <img src={deletePost} className="voteIcon" alt="delete icon" />
-                </button>
-                <div>
-                    <button onClick={(e) => this.increaseDecreaseVote(true, post.id)}>
-                        <img src={voteUp} className="voteIcon" alt="vote up icon" />
-                    </button>
-                    <p>{post.voteScore}</p>
-                    <button onClick={(e) => this.increaseDecreaseVote(false, post.id)}>
-                        <img src={voteDown} className="voteIcon" alt="vote down icon" />
-                    </button>
-                </div>
-                <div>
-                    <span className="postInfo">
-                        <address>{post.author}</address>
-                        <time>{ReadableUtil.formatDate(post.timestamp)}</time>
+                <div className="postCategory">
+                    <span className="voteScoreDetail">
+                        <button onClick={(e) => this.increaseDecreaseVote(true, post.id)}>
+                            <span>Upvote</span>{post.voteScore > 0 && (
+                                <span className="voteScoreLabel">{post.voteScore}</span>
+                            )}
+                        </button>
+                        <button onClick={(e) => this.increaseDecreaseVote(false, post.id)}>
+                            <span>Downvote</span>{post.voteScore < 0 && (
+                                <span className="voteScoreLabel">{post.voteScore}</span>
+                            )}
+                        </button>
                     </span>
-                    <span className="postCategory">
+                    <span className="category">
                         {post.category}
                     </span>
                 </div>
                 {comments.length > 0 && (
                     <div className="comments">
-                        <h4>Comments</h4>
-                        <ul>
-                            {comments.map((comment) => (
-                                <li key={comment.id} className="comment">
-                                    <p className="commentBody">
-                                        {comment.body}
-                                    </p>
-                                </li>
-                            ))}
-                        </ul>
+                        <h4>{comments.length > 1 ? comments.length + " Comments" : comments.length + " Comment"}</h4>
+                        {comments.map((comment) => (
+                            <Comment comment={comment}></Comment>
+                        ))}
                     </div>
                 )}
-            </div>
+            </div >
         )
     }
 }
