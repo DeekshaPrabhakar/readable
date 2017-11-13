@@ -171,6 +171,8 @@ button {
   color: #56B9D0;
   font-weight: bold;
   text-transform: uppercase;
+  font-size: 0.8em;
+  text-align: right;
 }
 
 .comments {
@@ -245,3 +247,31 @@ button {
 
 .tag { display: inline-block; margin-right: 24px;  }
 .tag input[type="checkbox"] { width: 25px; display: inline-block; }
+
+.profileImage {
+  width: 40px;
+  margin-right: 5px;
+}
+
+.profileImage img {
+  border-radius: 20px;
+  vertical-align: middle;
+}
+
+.postInfo {
+  margin: 6px 0;
+}
+
+.author {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.author address {
+  font-size: 0.9em;
+}
+
+.author time {
+  font-size: 0.8em;
+  color: #888;
+}

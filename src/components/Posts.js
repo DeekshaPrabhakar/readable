@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import * as ReadableUtil from '../ReadableUtil'
+import profile from '../images/profile.png'
+import user from '../images/user.png'
 
 class Posts extends Component {
 
@@ -31,18 +33,21 @@ class Posts extends Component {
                                     {post.title}
                                 </p>
                             </Link>
-                            <p className="excerpt">
-                                {post.body}
-                            </p>
-                            <div>
-                                <span className="postInfo">
+                            <div className="postInfo">
+                                <span className="profileImage">
+                                    <img src={post.author === "Deeksha Prabhakar" ? profile : user} />
+                                </span>
+                                <span className="author">
                                     <address>{post.author}</address>
                                     <time>{ReadableUtil.formatDate(post.timestamp)}</time>
                                 </span>
-                                <span className="postCategory">
-                                    {post.category}
-                                </span>
                             </div>
+                            <p className="excerpt">
+                                {post.body}
+                            </p>
+                            <p className="postCategory">
+                                {post.category}
+                            </p>
                         </li>
                     ))}
                 </ul>
