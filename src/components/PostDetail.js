@@ -64,10 +64,10 @@ class PostDetail extends Component {
                             pathname: '/editPost',
                             state: { post: post }
                         }}>
-                            <img src={editPost} className="voteIcon" alt="edit icon" />
+                            <img src={editPost} title="Edit Post" className="voteIcon" alt="edit icon" />
                         </Link>
                         <button className="deletePost" onClick={(e) => this.deletePost(post.id)}>
-                            <img src={deletePost} className="voteIcon" alt="delete icon" />
+                            <img src={deletePost} title="Delete Post" className="voteIcon" alt="delete icon" />
                         </button>
                     </span>
                 </div>
@@ -76,12 +76,12 @@ class PostDetail extends Component {
                 </p>
                 <div className="postCategory">
                     <span className="voteScoreDetail">
-                        <button onClick={(e) => this.increaseDecreaseVote(true, post.id)}>
+                        <button title="Upvote Post" onClick={(e) => this.increaseDecreaseVote(true, post.id)}>
                             <span>Upvote</span>{post.voteScore > 0 && (
                                 <span className="voteScoreLabel">{post.voteScore}</span>
                             )}
                         </button>
-                        <button onClick={(e) => this.increaseDecreaseVote(false, post.id)}>
+                        <button title="Downvote Post" onClick={(e) => this.increaseDecreaseVote(false, post.id)}>
                             <span>Downvote</span>{post.voteScore < 0 && (
                                 <span className="voteScoreLabel">{post.voteScore}</span>
                             )}

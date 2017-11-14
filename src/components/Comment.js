@@ -14,6 +14,12 @@ class Comment extends Component {
         })
     }
 
+    deleteComment = (commentID) => {
+        ReadableAPI.deleteComment(commentID).then(comment => {
+            console.log(comment)
+        })
+    }
+
     render() {
         const comment = this.props.comment
         return (
@@ -24,25 +30,25 @@ class Comment extends Component {
                         <span>&nbsp;-&nbsp;</span><address>{comment.author}</address>&nbsp;
                             <time>{ReadableUtil.formatDate(comment.timestamp)}</time>
                     </span>
-                    <Link className="editComment" to={{
+                    <Link to={{
                             pathname: '/editComment',
                             state: { comment: comment }
                         }}>
-                    <button className="editComment" >
+                    <button title="Edit Comment" className="editComment" >
                         <img src={editComment} alt="edit icon"/>Edit
                     </button>
                     </Link>
-                    <button className="deleteComment">
+                    <button title="Delete Comment" onClick={(e) => this.deleteComment(comment.id)} className="deleteComment">
                         <img src={deleteComment} alt="delete icon"/>Delete
                     </button>
                 </div>
                 <div className="commentScore">
-                    <button onClick={(e) => this.increaseDecreaseCommentVote(true, comment.id)}>
+                    <button title="Upvote Comment" onClick={(e) => this.increaseDecreaseCommentVote(true, comment.id)}>
                         <span>Upvote</span>{comment.voteScore > 0 && (
                             <span className="voteScoreLabel">{comment.voteScore}</span>
                         )}
                     </button>
-                    <button onClick={(e) => this.increaseDecreaseCommentVote(false, comment.id)}>
+                    <button title="Downvote Comment" onClick={(e) => this.increaseDecreaseCommentVote(false, comment.id)}>
                         <span>Downvote</span>{comment.voteScore < 0 && (
                             <span className="voteScoreLabel">{comment.voteScore}</span>
                         )}
