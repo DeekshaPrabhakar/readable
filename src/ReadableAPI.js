@@ -88,3 +88,25 @@ fetch(`${api}/comments/${commentId}`, {
     body: JSON.stringify(body)
 }).then(res => res.json())
 
+//create a comment for a post
+export const createComment = (body) =>
+fetch(`${api}/comments`, {
+    method: 'POST',
+    headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+}).then(res => res.json())
+
+
+//edit a comment
+export const editComment = (commentId, body) =>
+fetch(`${api}/comments/${commentId}`, {
+    method: 'PUT',
+    headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+}).then(res => res.json())

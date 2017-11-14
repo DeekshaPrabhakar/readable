@@ -172,7 +172,7 @@ button {
   font-weight: bold;
   font-size: 0.8em;
   text-align: right;
-  margin: 10px 0 0  ;
+  margin: 10px 10px 0 0;
 }
 
 .comments {
@@ -194,7 +194,7 @@ button {
 
 .comment img {
   vertical-align: middle;
-  margin-right: 3px;
+  margin-right: 6px;
 }
 
 .voteScore img.dislike {
@@ -203,7 +203,7 @@ button {
 
 .voteScore img  {
   vertical-align: bottom;
-  margin-right: 3px;
+  margin-right: 6px;
 }
 
 .category {
@@ -219,8 +219,9 @@ button {
 
 
 .editdetails input,
-.editdetails textarea {
-  width: 100%;
+.editdetails textarea,
+.editCommentdetails textarea {
+  width: 90%;
   padding: 10px;
   margin-bottom: 10px;
   font-size: 1em;
@@ -231,7 +232,9 @@ button {
 
 
 .editdetails button, 
-.editdetails a.closeEdit {
+.editdetails a.closeEdit,
+.editCommentdetails input[type="button"],
+.editCommentdetails input[type="submit"]{
   margin-top: 20px;
   padding: 10px;
   text-transform: uppercase;
@@ -362,3 +365,23 @@ button {
 .postComment:last-child {
   border: 0;
 }
+
+
+button.editComment,
+button.deleteComment {
+  margin-right: 6px;
+  margin-left: 6px;
+}
+
+
+button.editComment img,
+button.deleteComment img {
+  margin-right: 3px;
+}
+
+
+.editCommentDiv {
+  margin: 10px 0;
+}
+
+

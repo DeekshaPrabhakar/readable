@@ -9,6 +9,7 @@ import Home from './Home'
 import Category from './Category'
 import PostDetail from './PostDetail'
 import EditPost from './EditPost'
+import EditComment from './EditComment'
 import NoMatch from './NoMatch'
 
 class App extends Component {
@@ -20,12 +21,24 @@ class App extends Component {
 
     editPost(post, isEdit) {
         if (isEdit) {
-            ReadableAPI.editPost(post).then(post => {
+            ReadableAPI.editPost(post.id, post).then(post => {
                 console.log(post)
             })
         } else {
             ReadableAPI.createPost(post).then(post => {
                 console.log(post)
+            })
+        }
+    }
+
+    editComment(comment, isEdit) {
+        if (isEdit) {
+            ReadableAPI.editComment(comment.id, comment).then(comment => {
+                console.log(comment)
+            })
+        } else {
+            ReadableAPI.createComment(comment).then(comment => {
+                console.log(comment)
             })
         }
     }
@@ -99,7 +112,7 @@ class App extends Component {
                                 <Link to="/"><img src={logo} className="App-logo" alt="logo" />Readable</Link>
                             </li>
                             <li className="edit">
-                                <Link to="/edit"><img src={pencil} className="App-logo" alt="logo" />Post</Link>
+                                <Link to="/editPost"><img src={pencil} className="App-logo" alt="logo" />Post</Link>
                             </li>
                         </ul>
                     </nav>
@@ -120,14 +133,23 @@ class App extends Component {
                     {/* Post Detail view */}
                     <Route path="/posts/" render={props => (
                         <section className="mainContent">
-                            <PostDetail  {...props} />
+                            <PostDetail onEditComment={(comment,isEdit) => {
+                            this.editComment(comment,isEdit)
+                        }} {...props} />
                         </section>
                     )} />
 
                     {/* create/edit post */}
-                    <Route path="/edit" render={(props) => (
+                    <Route path="/editPost" render={(props) => (
                         <EditPost categories={this.state.categories} onEditPost={(post) => {
                             this.editPost(post)
+                        }}   {...props} />
+                    )} />
+
+                     {/* create/edit comment */}
+                     <Route path="/editComment" render={(props) => (
+                        <EditComment onEditComment={(comment,isEdit) => {
+                            this.editComment(comment,isEdit)
                         }}   {...props} />
                     )} />
                     <Route component={NoMatch} />

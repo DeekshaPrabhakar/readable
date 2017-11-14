@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import * as ReadableUtil from '../ReadableUtil'
 import * as ReadableAPI from '../ReadableAPI'
+import deleteComment from '../images/deleteComment.png'
+import editComment from '../images/editComment.png'
 
 class Comment extends Component {
 
@@ -21,6 +24,17 @@ class Comment extends Component {
                         <span>&nbsp;-&nbsp;</span><address>{comment.author}</address>&nbsp;
                             <time>{ReadableUtil.formatDate(comment.timestamp)}</time>
                     </span>
+                    <Link className="editComment" to={{
+                            pathname: '/editComment',
+                            state: { comment: comment }
+                        }}>
+                    <button className="editComment" >
+                        <img src={editComment} alt="edit icon"/>Edit
+                    </button>
+                    </Link>
+                    <button className="deleteComment">
+                        <img src={deleteComment} alt="delete icon"/>Delete
+                    </button>
                 </div>
                 <div className="commentScore">
                     <button onClick={(e) => this.increaseDecreaseCommentVote(true, comment.id)}>

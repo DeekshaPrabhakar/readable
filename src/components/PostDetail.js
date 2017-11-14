@@ -7,6 +7,7 @@ import editPost from '../images/editPost.png'
 import profile from '../images/profile.png'
 import user from '../images/user.png'
 import Comment from './Comment'
+import EditComment from './EditComment'
 
 class PostDetail extends Component {
 
@@ -60,7 +61,7 @@ class PostDetail extends Component {
                     </span>
                     <span className="postEditControls">
                         <Link className="editPost" to={{
-                            pathname: '/edit',
+                            pathname: '/editPost',
                             state: { post: post }
                         }}>
                             <img src={editPost} className="voteIcon" alt="edit icon" />
@@ -100,6 +101,9 @@ class PostDetail extends Component {
                         ))}
                     </div>
                 )}
+                <div>
+                    <EditComment onEditComment={this.props.onEditComment} postID={post.id}></EditComment>
+                    </div>
             </div >
         )
     }
