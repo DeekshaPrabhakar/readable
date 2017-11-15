@@ -24,8 +24,9 @@ class EditPost extends Component {
         if (this.props.onEditPost) {
             this.props.onEditPost(values, isEdit)
         }
-
-        this.props.toggleEditPost();
+        if (this.props.toggleEditPost) {
+            this.props.toggleEditPost();
+        }
     }
 
     render() {
