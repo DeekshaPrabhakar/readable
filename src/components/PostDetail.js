@@ -8,10 +8,12 @@ import profile from '../images/profile.png'
 import user from '../images/user.png'
 import Comment from './Comment'
 import EditComment from './EditComment'
+import EditPost from './EditPost'
 
 class PostDetail extends Component {
 
     state = {
+        isEditingPost: false,
         comments: []
     }
 
@@ -40,70 +42,82 @@ class PostDetail extends Component {
         })
     }
 
+    toggleEditPost = () => {
+        this.setState({
+            isEditingPost: !this.state.isEditingPost
+        })
+    }
+
     render() {
         const post = this.props.location.state.post
         const comments = this.state.comments
 
         return (
             <div className="postDetail">
-                <h3 className="postTitle">
-                    {post.title}
-                </h3>
-                <div className="postInfo">
-                    <span className="profileAuthor">
-                        <span className="profileImage">
-                            <img alt="profile icon" src={post.author === "Deeksha Prabhakar" ? profile : user} />
-                        </span>
-                        <span className="author">
-                            <address>{post.author}</address>
-                            <time>{ReadableUtil.formatDate(post.timestamp)}</time>
-                        </span>
-                    </span>
-                    <span className="postEditControls">
-                        <Link className="editPost" to={{
-                            pathname: '/editPost',
-                            state: { post: post }
-                        }}>
-                            <img src={editPost} title="Edit Post" className="voteIcon" alt="edit icon" />
-                        </Link>
-                        <button className="deletePost" onClick={(e) => this.deletePost(post.id)}>
-                            <img src={deletePost} title="Delete Post" className="voteIcon" alt="delete icon" />
-                        </button>
-                    </span>
-                </div>
-                <p className="excerpt">
-                    {post.body}
-                </p>
-                <div className="postCategory">
-                    <span className="voteScoreDetail">
-                        <button title="Upvote Post" onClick={(e) => this.increaseDecreaseVote(true, post.id)}>
-                            <span>Upvote</span>{post.voteScore > 0 && (
-                                <span className="voteScoreLabel">{post.voteScore}</span>
-                            )}
-                        </button>
-                        <button title="Downvote Post" onClick={(e) => this.increaseDecreaseVote(false, post.id)}>
-                            <span>Downvote</span>{post.voteScore < 0 && (
-                                <span className="voteScoreLabel">{post.voteScore}</span>
-                            )}
-                        </button>
-                    </span>
-                    <span className="category">
-                        {post.category}
-                    </span>
-                </div>
+                {this.state.isEditingPost && (
+                    <EditPost onEditPost={this.props.onEditPost} post={post} categories={this.props.categories} isEditingPost={this.state.isEditingPost} toggleEditPost={this.toggleEditPost} />
+                )}
+
+                {!this.state.isEditingPost && (
+                    <div>
+                        <h3 className="postTitle">
+                            {post.title}
+                        </h3>
+                        <div className="postInfo">
+                            <span className="profileAuthor">
+                                <span className="profileImage">
+                                    <img alt="profile icon" src={post.author === "Deeksha Prabhakar" ? profile : user} />
+                                </span>
+                                <span className="author">
+                                    <address>{post.author}</address>
+                                    <time>{ReadableUtil.formatDate(post.timestamp)}</time>
+                                </span>
+                            </span>
+                            <span className="postEditControls">
+                                <button className="editPost" onClick={(e) => this.toggleEditPost()}>
+                                    <img src={editPost} title="Edit Post" className="voteIcon" alt="edit icon" />
+                                </button>
+                                <button className="deletePost" onClick={(e) => this.deletePost(post.id)}>
+                                    <img src={deletePost} title="Delete Post" className="voteIcon" alt="delete icon" />
+                                </button>
+                            </span>
+                        </div>
+                        <p className="excerpt">
+                            {post.body}
+                        </p>
+                        <div className="postCategory">
+                            <span className="voteScoreDetail">
+                                <button title="Upvote Post" onClick={(e) => this.increaseDecreaseVote(true, post.id)}>
+                                    <span>Upvote</span>{post.voteScore > 0 && (
+                                        <span className="voteScoreLabel">{post.voteScore}</span>
+                                    )}
+                                </button>
+                                <button title="Downvote Post" onClick={(e) => this.increaseDecreaseVote(false, post.id)}>
+                                    <span>Downvote</span>{post.voteScore < 0 && (
+                                        <span className="voteScoreLabel">{post.voteScore}</span>
+                                    )}
+                                </button>
+                            </span>
+                            <span className="category">
+                                {post.category}
+                            </span>
+                        </div>
+                    </div >
+                )}
+
                 {comments.length > 0 && (
                     <div className="comments">
                         <h4>{comments.length > 1 ? comments.length + " Comments" : comments.length + " Comment"}</h4>
                         {comments.map((comment) => (
                             <div key={comment.id}>
-                                <Comment comment={comment}></Comment>
+                                <Comment onEditComment={this.props.onEditComment} postID={post.id} comment={comment}></Comment>
                             </div>
                         ))}
                     </div>
                 )}
                 <div>
                     <EditComment onEditComment={this.props.onEditComment} postID={post.id}></EditComment>
-                    </div>
+                </div>
             </div >
         )
     }

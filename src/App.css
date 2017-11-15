@@ -232,7 +232,7 @@ button {
 
 
 .editdetails button, 
-.editdetails a.closeEdit,
+.editdetails input[type="button"],
 .editCommentdetails input[type="button"],
 .editCommentdetails input[type="submit"]{
   margin-top: 20px;
@@ -298,12 +298,14 @@ button {
 
 .author address ,
 .commentAuthor address{
-  font-size: 0.9em;
+  font-size: 0.8em;
+  color: #56B9D0;
+  font-style: normal;
 }
 
 .author time,
 .commentAuthor time {
-  font-size: 0.8em;
+  font-size: 0.7em;
   color: #888;
 }
 
@@ -380,8 +382,11 @@ button.deleteComment img {
 }
 
 
-.editCommentDiv {
+.editCommentform {
   margin: 10px 0;
 }
 
 
+.activeCategory {
+  background: #eee;
+}

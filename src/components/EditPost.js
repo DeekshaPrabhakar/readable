@@ -12,7 +12,7 @@ class EditPost extends Component {
         if (!isEdit) {
             const postId = uuidv1()
             values.id = postId
-        }else{
+        } else {
             values.id = post.id
         }
 
@@ -24,35 +24,35 @@ class EditPost extends Component {
         if (this.props.onEditPost) {
             this.props.onEditPost(values, isEdit)
         }
+
+        this.props.toggleEditPost();
     }
 
     render() {
         const categories = this.props.categories
-        const isEdit = (this.props.location && this.props.location.state) ? true : false
-        const post = isEdit ? this.props.location.state.post : {}
+        const isEdit = this.props.isEditingPost
+        const post = this.props.post
 
         return (
-            <div className="editDiv">
-                <form onSubmit={(e) => {
-                    this.handleSubmit(e, isEdit, post)
-                }} className="editform">
-                    <div className="editdetails">
-                        <input type="text" name="title" placeholder="Title" defaultValue={post.title ? post.title : ""} />
-                        <textarea name="body" placeholder="Detail" cols="10" rows="5" defaultValue={post.body ? post.body : ""} />
-                        <div className="tags">
-                            {categories.map((category) => (
-                                <div key={category.name} className="tag">
-                                    <input type="checkbox" id={category.name} name="category" value={category.name} defaultChecked={post.category === category.name ? true : false} />
-                                    <label htmlFor={category.name}>{category.name}</label>
-                                </div>
-                            ))}
-                        </div>
-                        <input type="hidden" name="author" defaultValue={post.author ? post.author : "Deeksha Prabhakar"} />
-                        <button>Post</button>
-                        <Link className="closeEdit" to="/">Cancel</Link>
+            <form onSubmit={(e) => {
+                this.handleSubmit(e, isEdit, post)
+            }} className="editform">
+                <div className="editdetails">
+                    <input type="text" name="title" placeholder="Title" defaultValue={post.title ? post.title : ""} />
+                    <textarea name="body" placeholder="Detail" cols="10" rows="5" defaultValue={post.body ? post.body : ""} />
+                    <div className="tags">
+                        {categories.map((category) => (
+                            <div key={category.name} className="tag">
+                                <input type="checkbox" id={category.name} name="category" value={category.name} defaultChecked={post.category === category.name ? true : false} />
+                                <label htmlFor={category.name}>{category.name}</label>
+                            </div>
+                        ))}
                     </div>
-                </form>
-            </div>
+                    <input type="hidden" name="author" defaultValue={post.author ? post.author : "Deeksha Prabhakar"} />
+                    <button>Post</button>
+                    <input type="button" onClick={this.props.toggleEditPost} value="Cancel" />
+                </div>
+            </form>
         )
     }
 }

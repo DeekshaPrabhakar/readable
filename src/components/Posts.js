@@ -30,7 +30,6 @@ class Posts extends Component {
                             }}>
                                <Post post={post} />
                             </Link>
-                           
                         </div>
                     ))}
                 </div>
