@@ -1,10 +1,24 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 class CategoryList extends Component {
+    state = {
+        categories: this.props.categories
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.categories.length > 0) {
+            let categories = nextProps.categories
+            this.setState({
+                categories: categories
+            })
+        }
+    }
+
     render() {
-        const categories = this.props.categories
         const activeCategory = this.props.selectedCategory
+        const categories = this.state.categories ? this.state.categories : []
 
         return (
             <aside className="categories">
@@ -27,5 +41,9 @@ class CategoryList extends Component {
         );
     }
 }
+function mapStateToProps(state, ownProps) {
+    const categories = state.categories
+    return { categories: categories };
+}
 
-export default CategoryList;
+export default connect(mapStateToProps)(CategoryList)

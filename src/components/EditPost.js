@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import serializeForm from 'form-serialize'
+import { connect } from 'react-redux'
 const uuidv1 = require('uuid/v1')
 
 class EditPost extends Component {
+    state = {
+        categories: this.props.categories
+    }
 
     handleSubmit = (e, isEdit, post) => {
         e.preventDefault()
@@ -30,7 +34,7 @@ class EditPost extends Component {
     }
 
     render() {
-        const categories = this.props.categories
+        const categories = this.state.categories ? this.state.categories : []
         const isEdit = this.props.isEditingPost
         const post = this.props.post
 
@@ -51,11 +55,20 @@ class EditPost extends Component {
                     </div>
                     <input type="hidden" name="author" defaultValue={post.author ? post.author : "Deeksha Prabhakar"} />
                     <button>Post</button>
-                    <input type="button" onClick={this.props.toggleEditPost} value="Cancel" />
+                    {isEdit && (
+                        <input type="button" onClick={this.props.toggleEditPost} value="Cancel" />
+                    )}
+                    {!isEdit && (
+                        <Link className="closeEdit" to="/">Cancel</Link>
+                    )}
                 </div>
             </form>
         )
     }
 }
+function mapStateToProps(state, ownProps) {
+    const categories = state.categories
+    return { categories: categories };
+}
 
-export default EditPost
+export default connect(mapStateToProps)(EditPost)

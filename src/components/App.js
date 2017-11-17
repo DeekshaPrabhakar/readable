@@ -13,10 +13,6 @@ import NoMatch from './NoMatch'
 
 class App extends Component {
 
-    state = {
-        categories: [],
-        posts: []
-    }
 
     editPost(post, isEdit) {
         if (isEdit) {
@@ -40,65 +36,7 @@ class App extends Component {
                 console.log(comment)
             })
         }
-    }
-
-    updatePosts = (sortBy) => {
-        const posts = this.state.posts
-        switch (sortBy) {
-            case "timestampDesc":
-                posts.sort((a, b) => {
-                    return (new Date(a.timestamp) < new Date(b.timestamp))
-                })
-                this.setState({
-                    posts: posts
-                })
-                break;
-            case "timestampAsc":
-                posts.sort((a, b) => {
-                    return (new Date(a.timestamp) > new Date(b.timestamp))
-                })
-                this.setState({
-                    posts: posts
-                })
-                break;
-            case "voteDesc":
-                posts.sort((a, b) => {
-                    return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
-                })
-                this.setState({
-                    posts: posts
-                })
-                break;
-            case "voteAsc":
-                posts.sort((a, b) => {
-                    return (parseInt(a.voteScore, 10) - parseInt(b.voteScore, 10))
-                })
-                this.setState({
-                    posts: posts
-                })
-                break;
-            default:
-                break;
-        }
-    }
-
-    componentDidMount() {
-
-        ReadableAPI.getCategories().then((categories) => {
-            this.setState({
-                categories: categories
-            })
-        })
-
-        ReadableAPI.getAllPosts().then((posts) => {
-            posts.sort((a, b) => {
-                return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
-            })
-            this.setState({
-                posts: posts
-            })
-        })
-    }
+    }   
 
     render() {
 
@@ -119,20 +57,20 @@ class App extends Component {
                 <Switch>
                     {/* Root page shows categories and all posts */}
                     <Route exact path="/" render={props => (
-                        <Home categories={this.state.categories} posts={this.state.posts} updatePosts={this.updatePosts}  {...props} />
+                        <Home updatePosts={this.updatePosts}  {...props} />
                     )} />
 
                     {/* Category view */}
                     <Route path="/category/" render={props => (
                         <section className="mainContent">
-                            <Home categories={this.state.categories} posts={this.state.posts} updatePosts={this.updatePosts}  {...props} />
+                            <Home updatePosts={this.updatePosts}  {...props} />
                         </section>
                     )} />
 
                     {/* Post Detail view */}
                     <Route path="/posts/" render={props => (
                         <section className="mainContent">
-                            <PostDetail categories={this.state.categories} onEditPost={(post, isEdit) => {
+                            <PostDetail onEditPost={(post, isEdit) => {
                                 this.editPost(post, isEdit)
                             }} onEditComment={(comment, isEdit) => {
                                 this.editComment(comment, isEdit)
@@ -143,7 +81,7 @@ class App extends Component {
                     {/* create post */}
                     <Route path="/editPost" render={(props) => (
                         <div className="postDetail">
-                            <EditPost isEditingPost={false} post={{}} categories={this.state.categories} onEditPost={(post) => {
+                            <EditPost isEditingPost={false} post={{}} onEditPost={(post) => {
                                 this.editPost(post)
                             }}   {...props} />
                         </div>

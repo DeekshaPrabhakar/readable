@@ -233,6 +233,7 @@ button {
 
 .editdetails button, 
 .editdetails input[type="button"],
+.editdetails a.closeEdit,
 .editCommentdetails input[type="button"],
 .editCommentdetails input[type="submit"]{
   margin-top: 20px;
