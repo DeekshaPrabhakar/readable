@@ -4,11 +4,14 @@ export const RECEIVE_ALL_POSTS = "RECEIVE_ALL_POSTS"
 export const UPVOTE_POST = "UPVOTE_POST"
 export const DOWNVOTE_POST = "DOWNVOTE_POST"
 export const DELETE_POST = "DELETE_POST"
+export const CREATE_POST = "CREATE_POST"
+export const EDIT_POST = "EDIT_POST"
 
 export const RECEIVE_ALL_COMMENTS = "RECEIVE_ALL_COMMENTS"
 export const UPVOTE_COMMENT = "UPVOTE_COMMENT"
 export const DOWNVOTE_COMMENT = "DOWNVOTE_COMMENT"
 export const DELETE_COMMENT = "DELETE_COMMENT"
+
 
 
 /* fetch all posts */
@@ -40,6 +43,27 @@ export const decreasePostVoteScore = (postID) => dispatch => (
 
 export const downvotePost = (post) => ({
     type: DOWNVOTE_POST,
+    post
+})
+
+/* create a post */
+export const createPost = (post) => dispatch => (
+    ReadableAPI.createPost(post).then((post) => dispatch(addPost(post)))
+)
+
+export const addPost = (post) => ({
+    type: CREATE_POST,
+    post
+})
+
+
+/* edit a post */
+export const editPost = (post) => dispatch => (
+    ReadableAPI.editPost(post.id, post).then((post) => dispatch(updatePost(post)))
+)
+
+export const updatePost = (post) => ({
+    type: EDIT_POST,
     post
 })
 

@@ -12,18 +12,6 @@ import NoMatch from './NoMatch'
 
 class App extends Component {
 
-    editPost(post, isEdit) {
-        if (isEdit) {
-            ReadableAPI.editPost(post.id, post).then(post => {
-                console.log(post)
-            })
-        } else {
-            ReadableAPI.createPost(post).then(post => {
-                console.log(post)
-            })
-        }
-    }
-
     editComment(comment, isEdit) {
         if (isEdit) {
             ReadableAPI.editComment(comment.id, comment).then(comment => {
@@ -68,9 +56,7 @@ class App extends Component {
                     {/* Post Detail view */}
                     <Route path="/posts/" render={props => (
                         <section className="mainContent">
-                            <PostDetail onEditPost={(post, isEdit) => {
-                                this.editPost(post, isEdit)
-                            }} onEditComment={(comment, isEdit) => {
+                            <PostDetail onEditComment={(comment, isEdit) => {
                                 this.editComment(comment, isEdit)
                             }} {...props} />
                         </section>
@@ -79,9 +65,7 @@ class App extends Component {
                     {/* create post */}
                     <Route path="/editPost" render={(props) => (
                         <div className="postDetail">
-                            <EditPost isEditingPost={false} post={{}} onEditPost={(post) => {
-                                this.editPost(post)
-                            }}   {...props} />
+                            <EditPost isEditingPost={false} post={{}} redirect={false}  {...props} />
                         </div>
                     )} />
 

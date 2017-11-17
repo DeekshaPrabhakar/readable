@@ -85,7 +85,7 @@ class Posts extends Component {
                     {posts.map((post) => (
                         <div key={post.id} className="post">
                             <Link to={{
-                                pathname: '/posts/' + post.title.split(' ').join('_'),
+                                pathname: '/posts/' + post.id.split('-').join(''),
                                 state: { post: post }
                             }}>
                                 <Post post={post} />
@@ -100,6 +100,9 @@ class Posts extends Component {
 
 function mapStateToProps(state, ownProps) {
     const posts = state.posts
+    posts.sort((a, b) => {
+        return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
+    })
     return { posts: posts };
 }
 

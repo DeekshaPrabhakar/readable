@@ -2,41 +2,47 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import serializeForm from 'form-serialize'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router';
+import { createPost, editPost } from '../actions/postActions'
 const uuidv1 = require('uuid/v1')
 
 class EditPost extends Component {
     state = {
-        categories: this.props.categories
+        categories: this.props.categories,
+        isEdit: this.props.isEditingPost,
+        post: this.props.post,
+        posts: this.props.allPosts
     }
 
     handleSubmit = (e, isEdit, post) => {
         e.preventDefault()
         const values = serializeForm(e.target, { hash: true })
+        values.timestamp = Date.now()
+        values.deleted = false
 
         if (!isEdit) {
             const postId = uuidv1()
             values.id = postId
+            this.props.createNewPost(values)
         } else {
             values.id = post.id
+            this.props.editExistingPost(values)
         }
 
-        values.timestamp = Date.now()
-        values.deleted = false
-
-        console.log(values)
-
-        if (this.props.onEditPost) {
-            this.props.onEditPost(values, isEdit)
-        }
         if (this.props.toggleEditPost) {
             this.props.toggleEditPost();
         }
     }
 
     render() {
+
+        if (this.props.redirect) {
+            return <Redirect push to="/" />;
+          }
+        
         const categories = this.state.categories ? this.state.categories : []
-        const isEdit = this.props.isEditingPost
-        const post = this.props.post
+        const isEdit = this.state.isEdit
+        const post = this.state.post
 
         return (
             <form onSubmit={(e) => {
@@ -68,7 +74,17 @@ class EditPost extends Component {
 }
 function mapStateToProps(state, ownProps) {
     const categories = state.categories
-    return { categories: categories };
+    const redirect = state.redirect ? state.redirect : false
+
+    return { categories: categories, redirect: redirect };
 }
 
-export default connect(mapStateToProps)(EditPost)
+
+function mapDispatchToProps(dispatch) {
+    return {
+        createNewPost: (post) => dispatch(createPost(post)),
+        editExistingPost: (post) => dispatch(editPost(post))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditPost)

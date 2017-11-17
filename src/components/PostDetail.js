@@ -68,7 +68,7 @@ class PostDetail extends Component {
         return (
             <div className="postDetail">
                 {this.state.isEditingPost && (
-                    <EditPost onEditPost={this.props.onEditPost} post={post} categories={this.props.categories} isEditingPost={this.state.isEditingPost} toggleEditPost={this.toggleEditPost} />
+                    <EditPost onEditPost={this.props.onEditPost} redirect={false} post={post} categories={this.props.categories} isEditingPost={this.state.isEditingPost} toggleEditPost={this.toggleEditPost} />
                 )}
 
                 {!this.state.isEditingPost && (
