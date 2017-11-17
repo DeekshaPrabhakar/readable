@@ -4,6 +4,8 @@ import { RECEIVE_ALL_POSTS, UPVOTE_POST, DOWNVOTE_POST } from '../actions/postAc
 
 function content(state = { posts: [] }, action) {
     const { posts, categories } = action
+    let updatedPosts = []
+    let newState = {}
 
     switch (action.type) {
         case RECEIVE_ALL_POSTS:
@@ -11,15 +13,21 @@ function content(state = { posts: [] }, action) {
         case RECEIVE_ALL_CATEGORIES:
             return Object.assign({}, state, { categories: categories })
         case UPVOTE_POST:
-            let updatedPosts = state.posts.filter(post => post.id !== action.post.id)
+            updatedPosts = state.posts.filter(post => post.id !== action.post.id)
             updatedPosts.push(action.post)
-            let newState = {
+            newState = {
                 ...state,
                 posts: updatedPosts
             }
             return newState
         case DOWNVOTE_POST:
-            return state
+            updatedPosts = state.posts.filter(post => post.id !== action.post.id)
+            updatedPosts.push(action.post)
+            newState = {
+                ...state,
+                posts: updatedPosts
+            }
+            return newState
         default:
             return state
     }
