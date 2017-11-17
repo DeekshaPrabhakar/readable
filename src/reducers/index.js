@@ -11,12 +11,13 @@ function content(state = { posts: [] }, action) {
         case RECEIVE_ALL_CATEGORIES:
             return Object.assign({}, state, { categories: categories })
         case UPVOTE_POST:
-            let test = state.posts.filter(post => post.id !== action.post.id)
-            test.push(action.post)
-            return {
+            let updatedPosts = state.posts.filter(post => post.id !== action.post.id)
+            updatedPosts.push(action.post)
+            let newState = {
                 ...state,
-                [posts]: test
+                posts: updatedPosts
             }
+            return newState
         case DOWNVOTE_POST:
             return state
         default:
