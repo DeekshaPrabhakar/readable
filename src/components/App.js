@@ -8,11 +8,9 @@ import * as ReadableAPI from '../ReadableAPI'
 import Home from './Home'
 import PostDetail from './PostDetail'
 import EditPost from './EditPost'
-import EditComment from './EditComment'
 import NoMatch from './NoMatch'
 
 class App extends Component {
-
 
     editPost(post, isEdit) {
         if (isEdit) {

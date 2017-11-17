@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import * as ReadableUtil from '../ReadableUtil'
 import * as ReadableAPI from '../ReadableAPI'
 import deleteComment from '../images/deleteComment.png'

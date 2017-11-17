@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import * as ReadableAPI from '../ReadableAPI'
 import * as ReadableUtil from '../ReadableUtil'
 import deletePost from '../images/deletePost.png'
@@ -9,11 +8,15 @@ import user from '../images/user.png'
 import Comment from './Comment'
 import EditComment from './EditComment'
 import EditPost from './EditPost'
+import { connect } from 'react-redux'
+import { increasePostVoteScore, decreasePostVoteScore } from '../actions/postActions'
 
 class PostDetail extends Component {
 
     state = {
+        posts: this.props.posts,
         isEditingPost: false,
+        post: this.props.location.state.post,
         comments: []
     }
 
@@ -28,14 +31,7 @@ class PostDetail extends Component {
             })
         });
     }
-
-    increaseDecreaseVote = (isIncrease, postID) => {
-        let param = isIncrease ? { option: "upVote" } : { option: "downVote" }
-        ReadableAPI.votePost(postID, param).then(post => {
-            console.log(post)
-        })
-    }
-
+    
     deletePost = (postID) => {
         ReadableAPI.deletePost(postID).then(post => {
             console.log(post)
@@ -47,10 +43,21 @@ class PostDetail extends Component {
             isEditingPost: !this.state.isEditingPost
         })
     }
-
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.posts.length > 0) {
+            const postID = this.state.post.id
+            let post = nextProps.posts.filter(post => post.id === postID)
+            if (post.length > 0) {
+                this.setState({
+                    post: post[0]
+                })
+            }
+        }
+    }
     render() {
-        const post = this.props.location.state.post
+        const post = this.state.post
         const comments = this.state.comments
+        const { increasePostVote, decreasePostVote } = this.props
 
         return (
             <div className="postDetail">
@@ -87,12 +94,12 @@ class PostDetail extends Component {
                         </p>
                         <div className="postCategory">
                             <span className="voteScoreDetail">
-                                <button title="Upvote Post" onClick={(e) => this.increaseDecreaseVote(true, post.id)}>
+                                <button title="Upvote Post" onClick={() => increasePostVote(post.id)}>
                                     <span>Upvote</span>{post.voteScore > 0 && (
                                         <span className="voteScoreLabel">{post.voteScore}</span>
                                     )}
                                 </button>
-                                <button title="Downvote Post" onClick={(e) => this.increaseDecreaseVote(false, post.id)}>
+                                <button title="Downvote Post" onClick={() => decreasePostVote(post.id)}>
                                     <span>Downvote</span>{post.voteScore < 0 && (
                                         <span className="voteScoreLabel">{post.voteScore}</span>
                                     )}
@@ -123,4 +130,15 @@ class PostDetail extends Component {
     }
 }
 
-export default PostDetail;
+function mapStateToProps(state, ownProps) {
+    const posts = state.posts
+    return { posts: posts };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        increasePostVote: (postID) => dispatch(increasePostVoteScore(postID)),
+        decreasePostVote: (postID) => dispatch(decreasePostVoteScore(postID))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetail)

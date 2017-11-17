@@ -26,7 +26,7 @@ class CategoryList extends Component {
                 <nav>
                     <ul>
                         {categories.map((category) => (
-                            <li key={category.path} className={category.name == activeCategory ? "activeCategory" : ""}>
+                            <li key={category.path} className={category.name === activeCategory ? "activeCategory" : ""}>
                                 <Link to={{
                                     pathname: '/category/' + category.path,
                                     state: { category: category.path }

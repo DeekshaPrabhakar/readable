@@ -65,7 +65,7 @@ class Posts extends Component {
 
     render() {
         const category = this.props.selectedCategory
-        const posts = category != "" ? this.state.posts.filter(post => post.category === category) : this.state.posts
+        const posts = category !== "" ? this.state.posts.filter(post => post.category === category) : this.state.posts
 
         return (
             <div className="postsDiv">
