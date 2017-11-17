@@ -12,24 +12,26 @@ class EditComment extends Component {
     handleCommentSubmit = (e, isEdit, comment) => {
         e.preventDefault()
         const values = serializeForm(e.target, { hash: true })
+        values.timestamp = Date.now()
 
         if (!isEdit) {
             const commentId = uuidv1()
             values.id = commentId
             values.deleted = false
+            this.props.createNewComment(values)
         } else {
             values.id = comment.id
             delete values.author
             delete values.parentId
+            this.props.editExistingComment(values)
         }
 
-        values.timestamp = Date.now()
-
-        if (this.props.onEditComment) {
-            this.props.onEditComment(values, isEdit)
+        this.clearForm()
+        if (this.props.toggleEditComment) {
+            this.props.toggleEditComment()
         }
-        this.clearForm();
     }
+
     updateCommentBody = (body) => {
         this.setState({ commentBody: body })
     }

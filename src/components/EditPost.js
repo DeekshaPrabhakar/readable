@@ -38,8 +38,8 @@ class EditPost extends Component {
 
         if (this.props.redirect) {
             return <Redirect push to="/" />;
-          }
-        
+        }
+
         const categories = this.state.categories ? this.state.categories : []
         const isEdit = this.state.isEdit
         const post = this.state.post

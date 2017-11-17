@@ -10,7 +10,7 @@ import EditComment from './EditComment'
 import EditPost from './EditPost'
 import { connect } from 'react-redux'
 import { increasePostVoteScore, decreasePostVoteScore, deletePost } from '../actions/postActions'
-import { fetchAllComments, increaseCommentVoteScore, decreaseCommentVoteScore, deleteComment } from '../actions/postActions'
+import { fetchAllComments, increaseCommentVoteScore, decreaseCommentVoteScore, deleteComment, createComment, editComment } from '../actions/postActions'
 
 class PostDetail extends Component {
 
@@ -63,7 +63,8 @@ class PostDetail extends Component {
     render() {
         const post = this.state.post
         const comments = this.state.comments
-        const { increasePostVote, decreasePostVote, increaseCommentVote, decreaseCommentVote, removePost, removeComment } = this.props
+        const { increasePostVote, decreasePostVote, removePost, } = this.props
+        const { increaseCommentVote, decreaseCommentVote, removeComment, createNewComment, editExistingComment } = this.props
 
         return (
             <div className="postDetail">
@@ -124,13 +125,13 @@ class PostDetail extends Component {
                         {comments.map((comment) => (
                             <div key={comment.id}>
                                 <Comment increaseCommentVote={increaseCommentVote} decreaseCommentVote={decreaseCommentVote}
-                                    removeComment={removeComment} onEditComment={this.props.onEditComment} postID={post.id} comment={comment}></Comment>
+                                    removeComment={removeComment} editExistingComment={editExistingComment} postID={post.id} comment={comment}></Comment>
                             </div>
                         ))}
                     </div>
                 )}
                 <div>
-                    <EditComment onEditComment={this.props.onEditComment} postID={post.id}></EditComment>
+                    <EditComment createNewComment={createNewComment} postID={post.id}></EditComment>
                 </div>
             </div >
         )
@@ -151,7 +152,9 @@ function mapDispatchToProps(dispatch) {
         increaseCommentVote: (commentID) => dispatch(increaseCommentVoteScore(commentID)),
         decreaseCommentVote: (commentID) => dispatch(decreaseCommentVoteScore(commentID)),
         getAllCommentsForPost: (postID) => dispatch(fetchAllComments(postID)),
-        removeComment: (commentID) => dispatch(deleteComment(commentID))
+        removeComment: (commentID) => dispatch(deleteComment(commentID)),
+        createNewComment: (comment) => dispatch(createComment(comment)),
+        editExistingComment: (comment) => dispatch(editComment(comment))
     }
 }
 

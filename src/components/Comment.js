@@ -22,7 +22,7 @@ class Comment extends Component {
         return (
             <div>
                 {this.state.isEditingComment && (
-                    <EditComment isEditingComment={this.state.isEditingComment} toggleEditComment={this.toggleEditComment} comment={comment} onEditComment={this.props.onEditComment} postID={this.props.postID}></EditComment>
+                    <EditComment isEditingComment={this.state.isEditingComment} toggleEditComment={this.toggleEditComment} comment={comment} editExistingComment={this.props.editExistingComment} postID={this.props.postID}></EditComment>
                 )}
                 {!this.state.isEditingComment && (
                     <div className="postComment">

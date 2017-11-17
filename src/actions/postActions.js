@@ -11,7 +11,8 @@ export const RECEIVE_ALL_COMMENTS = "RECEIVE_ALL_COMMENTS"
 export const UPVOTE_COMMENT = "UPVOTE_COMMENT"
 export const DOWNVOTE_COMMENT = "DOWNVOTE_COMMENT"
 export const DELETE_COMMENT = "DELETE_COMMENT"
-
+export const CREATE_COMMENT = "CREATE_COMMENT"
+export const EDIT_COMMENT = "EDIT_COMMENT"
 
 
 /* fetch all posts */
@@ -121,5 +122,27 @@ export const deleteComment = (commentID) => dispatch => (
 
 export const removeComment = (comment) => ({
     type: DELETE_COMMENT,
+    comment
+})
+
+
+/* create a comment */
+export const createComment = (comment) => dispatch => (
+    ReadableAPI.createComment(comment).then((comment) => dispatch(addComment(comment)))
+)
+
+export const addComment = (comment) => ({
+    type: CREATE_COMMENT,
+    comment
+})
+
+
+/* edit a comment */
+export const editComment = (comment) => dispatch => (
+    ReadableAPI.editComment(comment.id, comment).then((comment) => dispatch(updateComment(comment)))
+)
+
+export const updateComment = (comment) => ({
+    type: EDIT_COMMENT,
     comment
 })

@@ -56,7 +56,7 @@ class Posts extends Component {
             posts.sort((a, b) => {
                 return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
             })
-            
+
             this.setState({
                 posts: posts
             })

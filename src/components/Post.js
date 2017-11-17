@@ -5,6 +5,7 @@ import comment from '../images/comment.png'
 import like from '../images/like.png'
 import dislike from '../images/dislike.png'
 import * as ReadableUtil from '../ReadableUtil'
+
 class Post extends Component {
     render() {
         const post = this.props.post
