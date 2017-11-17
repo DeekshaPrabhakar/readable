@@ -26,12 +26,6 @@ class PostDetail extends Component {
         this.props.getAllCommentsForPost(post.id)
     }
 
-    // deletePost = (postID) => {
-    //     ReadableAPI.deletePost(postID).then(post => {
-    //         console.log(post)
-    //     })
-    // }
-
     toggleEditPost = () => {
         this.setState({
             isEditingPost: !this.state.isEditingPost
@@ -40,13 +34,16 @@ class PostDetail extends Component {
 
     componentWillReceiveProps(nextProps) {
 
-        if (nextProps.posts.length > 0) {
+        if (nextProps.posts) {
             const postID = this.state.post.id
             let post = nextProps.posts.filter(post => post.id === postID)
             if (post.length > 0) {
                 this.setState({
                     post: post[0]
                 })
+            }
+            else {
+                nextProps.history.push("/")
             }
         }
 
@@ -93,7 +90,7 @@ class PostDetail extends Component {
                                 <button className="editPost" onClick={(e) => this.toggleEditPost()}>
                                     <img src={editPost} title="Edit Post" className="voteIcon" alt="edit icon" />
                                 </button>
-                                <button className="deletePost" onClick={(e) => this.deletePost(post.id)}>
+                                <button className="deletePost" onClick={(e) => removePost(post.id)}>
                                     <img src={deletePostIcon} title="Delete Post" className="voteIcon" alt="delete icon" />
                                 </button>
                             </span>

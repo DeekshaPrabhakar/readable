@@ -2,7 +2,6 @@ import { RECEIVE_ALL_CATEGORIES } from '../actions/categoryAction'
 import { RECEIVE_ALL_POSTS, UPVOTE_POST, DOWNVOTE_POST, DELETE_POST } from '../actions/postActions'
 import { RECEIVE_ALL_COMMENTS, UPVOTE_COMMENT, DOWNVOTE_COMMENT, DELETE_COMMENT } from '../actions/postActions'
 
-
 function content(state = { posts: [] }, action) {
     const { posts, categories, comments } = action
     let updatedPosts = []
