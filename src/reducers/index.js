@@ -1,10 +1,12 @@
 import { RECEIVE_ALL_CATEGORIES } from '../actions/categoryAction'
 import { RECEIVE_ALL_POSTS, UPVOTE_POST, DOWNVOTE_POST } from '../actions/postActions'
+import { RECEIVE_ALL_COMMENTS, UPVOTE_COMMENT, DOWNVOTE_COMMENT } from '../actions/postActions'
 
 
 function content(state = { posts: [] }, action) {
-    const { posts, categories } = action
+    const { posts, categories, comments } = action
     let updatedPosts = []
+    let updatedComments = []
     let newState = {}
 
     switch (action.type) {
@@ -26,6 +28,24 @@ function content(state = { posts: [] }, action) {
             newState = {
                 ...state,
                 posts: updatedPosts
+            }
+            return newState
+        case RECEIVE_ALL_COMMENTS:
+            return Object.assign({}, state, { comments: comments })
+        case UPVOTE_COMMENT:
+            updatedComments = state.comments.filter(comment => comment.id !== action.comment.id)
+            updatedComments.push(action.comment)
+            newState = {
+                ...state,
+                comments: updatedComments
+            }
+            return newState
+        case DOWNVOTE_COMMENT:
+            updatedComments = state.comments.filter(comment => comment.id !== action.comment.id)
+            updatedComments.push(action.comment)
+            newState = {
+                ...state,
+                comments: updatedComments
             }
             return newState
         default:

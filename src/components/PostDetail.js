@@ -10,6 +10,7 @@ import EditComment from './EditComment'
 import EditPost from './EditPost'
 import { connect } from 'react-redux'
 import { increasePostVoteScore, decreasePostVoteScore } from '../actions/postActions'
+import { fetchAllComments, increaseCommentVoteScore, decreaseCommentVoteScore } from '../actions/postActions'
 
 class PostDetail extends Component {
 
@@ -22,16 +23,9 @@ class PostDetail extends Component {
 
     componentDidMount() {
         const post = this.props.location.state.post
-        ReadableAPI.getPostComments(post.id).then(comments => {
-            comments.sort((a, b) => {
-                return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
-            })
-            this.setState({
-                comments: comments
-            })
-        });
+        this.props.getAllCommentsForPost(post.id)
     }
-    
+
     deletePost = (postID) => {
         ReadableAPI.deletePost(postID).then(post => {
             console.log(post)
@@ -43,7 +37,9 @@ class PostDetail extends Component {
             isEditingPost: !this.state.isEditingPost
         })
     }
+
     componentWillReceiveProps(nextProps) {
+
         if (nextProps.posts.length > 0) {
             const postID = this.state.post.id
             let post = nextProps.posts.filter(post => post.id === postID)
@@ -53,11 +49,22 @@ class PostDetail extends Component {
                 })
             }
         }
+
+        if (nextProps.comments && nextProps.comments.length > 0) {
+            const comments = nextProps.comments
+            comments.sort((a, b) => {
+                return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
+            })
+            this.setState({
+                comments: comments
+            })
+        }
     }
+
     render() {
         const post = this.state.post
         const comments = this.state.comments
-        const { increasePostVote, decreasePostVote } = this.props
+        const { increasePostVote, decreasePostVote, increaseCommentVote, decreaseCommentVote } = this.props
 
         return (
             <div className="postDetail">
@@ -117,7 +124,8 @@ class PostDetail extends Component {
                         <h4>{comments.length > 1 ? comments.length + " Comments" : comments.length + " Comment"}</h4>
                         {comments.map((comment) => (
                             <div key={comment.id}>
-                                <Comment onEditComment={this.props.onEditComment} postID={post.id} comment={comment}></Comment>
+                                <Comment increaseCommentVote={increaseCommentVote} decreaseCommentVote={decreaseCommentVote}
+                                    onEditComment={this.props.onEditComment} postID={post.id} comment={comment}></Comment>
                             </div>
                         ))}
                     </div>
@@ -132,13 +140,18 @@ class PostDetail extends Component {
 
 function mapStateToProps(state, ownProps) {
     const posts = state.posts
-    return { posts: posts };
+    const comments = state.comments ? state.comments : comments
+    return { posts: posts, comments: comments };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         increasePostVote: (postID) => dispatch(increasePostVoteScore(postID)),
-        decreasePostVote: (postID) => dispatch(decreasePostVoteScore(postID))
+        decreasePostVote: (postID) => dispatch(decreasePostVoteScore(postID)),
+        increaseCommentVote: (commentID) => dispatch(increaseCommentVoteScore(commentID)),
+        decreaseCommentVote: (commentID) => dispatch(decreaseCommentVoteScore(commentID)),
+        getAllCommentsForPost: (postID) => dispatch(fetchAllComments(postID))
     }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail)

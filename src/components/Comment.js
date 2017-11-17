@@ -17,13 +17,6 @@ class Comment extends Component {
         })
     }
 
-    increaseDecreaseCommentVote = (isIncrease, commentID) => {
-        let param = isIncrease ? { option: "upVote" } : { option: "downVote" }
-        ReadableAPI.voteComment(commentID, param).then(comment => {
-            console.log(comment)
-        })
-    }
-
     deleteComment = (commentID) => {
         ReadableAPI.deleteComment(commentID).then(comment => {
             console.log(comment)
@@ -54,12 +47,12 @@ class Comment extends Component {
                     </button>
                         </div>
                         <div className="commentScore">
-                            <button title="Upvote Comment" onClick={(e) => this.increaseDecreaseCommentVote(true, comment.id)}>
+                            <button title="Upvote Comment" onClick={(e) => this.props.increaseCommentVote(comment.id)}>
                                 <span>Upvote</span>{comment.voteScore > 0 && (
                                     <span className="voteScoreLabel">{comment.voteScore}</span>
                                 )}
                             </button>
-                            <button title="Downvote Comment" onClick={(e) => this.increaseDecreaseCommentVote(false, comment.id)}>
+                            <button title="Downvote Comment" onClick={(e) => this.props.decreaseCommentVote(comment.id)}>
                                 <span>Downvote</span>{comment.voteScore < 0 && (
                                     <span className="voteScoreLabel">{comment.voteScore}</span>
                                 )}

@@ -34,7 +34,7 @@ class App extends Component {
                 console.log(comment)
             })
         }
-    }   
+    }
 
     render() {
 
