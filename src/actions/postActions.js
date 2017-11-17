@@ -3,10 +3,12 @@ import * as ReadableAPI from '../ReadableAPI'
 export const RECEIVE_ALL_POSTS = "RECEIVE_ALL_POSTS"
 export const UPVOTE_POST = "UPVOTE_POST"
 export const DOWNVOTE_POST = "DOWNVOTE_POST"
+export const DELETE_POST = "DELETE_POST"
 
 export const RECEIVE_ALL_COMMENTS = "RECEIVE_ALL_COMMENTS"
 export const UPVOTE_COMMENT = "UPVOTE_COMMENT"
 export const DOWNVOTE_COMMENT = "DOWNVOTE_COMMENT"
+export const DELETE_COMMENT = "DELETE_COMMENT"
 
 
 /* fetch all posts */
@@ -42,6 +44,18 @@ export const downvotePost = (post) => ({
 })
 
 
+/* delete a post */
+export const deletePost = (postID) => dispatch => (
+    ReadableAPI.deletePost(postID).then((post) => dispatch(removePost(post)))
+)
+
+export const removePost = (post) => ({
+    type: DELETE_POST,
+    post
+})
+
+
+
 
 /* fetch all comments */
 export const fetchAllComments = (postID) => dispatch => (
@@ -72,5 +86,16 @@ export const decreaseCommentVoteScore = (commentID) => dispatch => (
 
 export const downvoteComment = (comment) => ({
     type: DOWNVOTE_COMMENT,
+    comment
+})
+
+
+/* delete a comment */
+export const deleteComment = (commentID) => dispatch => (
+    ReadableAPI.deleteComment(commentID).then((comment) => dispatch(removeComment(comment)))
+)
+
+export const removeComment = (comment) => ({
+    type: DELETE_COMMENT,
     comment
 })

@@ -1,6 +1,6 @@
 import { RECEIVE_ALL_CATEGORIES } from '../actions/categoryAction'
-import { RECEIVE_ALL_POSTS, UPVOTE_POST, DOWNVOTE_POST } from '../actions/postActions'
-import { RECEIVE_ALL_COMMENTS, UPVOTE_COMMENT, DOWNVOTE_COMMENT } from '../actions/postActions'
+import { RECEIVE_ALL_POSTS, UPVOTE_POST, DOWNVOTE_POST, DELETE_POST } from '../actions/postActions'
+import { RECEIVE_ALL_COMMENTS, UPVOTE_COMMENT, DOWNVOTE_COMMENT, DELETE_COMMENT } from '../actions/postActions'
 
 
 function content(state = { posts: [] }, action) {
@@ -30,6 +30,13 @@ function content(state = { posts: [] }, action) {
                 posts: updatedPosts
             }
             return newState
+        case DELETE_POST:
+            updatedPosts = state.posts.filter(post => post.id !== action.post.id)
+            newState = {
+                ...state,
+                posts: updatedPosts
+            }
+            return newState
         case RECEIVE_ALL_COMMENTS:
             return Object.assign({}, state, { comments: comments })
         case UPVOTE_COMMENT:
@@ -43,6 +50,13 @@ function content(state = { posts: [] }, action) {
         case DOWNVOTE_COMMENT:
             updatedComments = state.comments.filter(comment => comment.id !== action.comment.id)
             updatedComments.push(action.comment)
+            newState = {
+                ...state,
+                comments: updatedComments
+            }
+            return newState
+        case DELETE_COMMENT:
+            updatedComments = state.comments.filter(comment => comment.id !== action.comment.id)
             newState = {
                 ...state,
                 comments: updatedComments

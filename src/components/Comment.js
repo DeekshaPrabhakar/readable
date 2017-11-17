@@ -17,12 +17,6 @@ class Comment extends Component {
         })
     }
 
-    deleteComment = (commentID) => {
-        ReadableAPI.deleteComment(commentID).then(comment => {
-            console.log(comment)
-        })
-    }
-
     render() {
         const comment = this.props.comment
         return (
@@ -42,7 +36,7 @@ class Comment extends Component {
                             <button title="Edit Comment" className="editComment" onClick={this.toggleEditComment} >
                                 <img src={editComment} alt="edit icon" />Edit
                     </button>
-                            <button title="Delete Comment" onClick={(e) => this.deleteComment(comment.id)} className="deleteComment">
+                            <button title="Delete Comment" onClick={(e) => this.props.removeComment(comment.id)} className="deleteComment">
                                 <img src={deleteComment} alt="delete icon" />Delete
                     </button>
                         </div>

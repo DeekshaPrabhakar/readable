@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import * as ReadableAPI from '../ReadableAPI'
 import * as ReadableUtil from '../ReadableUtil'
-import deletePost from '../images/deletePost.png'
+import deletePostIcon from '../images/deletePost.png'
 import editPost from '../images/editPost.png'
 import profile from '../images/profile.png'
 import user from '../images/user.png'
@@ -9,8 +9,8 @@ import Comment from './Comment'
 import EditComment from './EditComment'
 import EditPost from './EditPost'
 import { connect } from 'react-redux'
-import { increasePostVoteScore, decreasePostVoteScore } from '../actions/postActions'
-import { fetchAllComments, increaseCommentVoteScore, decreaseCommentVoteScore } from '../actions/postActions'
+import { increasePostVoteScore, decreasePostVoteScore, deletePost } from '../actions/postActions'
+import { fetchAllComments, increaseCommentVoteScore, decreaseCommentVoteScore, deleteComment } from '../actions/postActions'
 
 class PostDetail extends Component {
 
@@ -26,11 +26,11 @@ class PostDetail extends Component {
         this.props.getAllCommentsForPost(post.id)
     }
 
-    deletePost = (postID) => {
-        ReadableAPI.deletePost(postID).then(post => {
-            console.log(post)
-        })
-    }
+    // deletePost = (postID) => {
+    //     ReadableAPI.deletePost(postID).then(post => {
+    //         console.log(post)
+    //     })
+    // }
 
     toggleEditPost = () => {
         this.setState({
@@ -50,11 +50,13 @@ class PostDetail extends Component {
             }
         }
 
-        if (nextProps.comments && nextProps.comments.length > 0) {
+        if (nextProps.comments) {
             const comments = nextProps.comments
-            comments.sort((a, b) => {
-                return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
-            })
+            if (nextProps.comments.length > 1) {
+                comments.sort((a, b) => {
+                    return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
+                })
+            }
             this.setState({
                 comments: comments
             })
@@ -64,7 +66,7 @@ class PostDetail extends Component {
     render() {
         const post = this.state.post
         const comments = this.state.comments
-        const { increasePostVote, decreasePostVote, increaseCommentVote, decreaseCommentVote } = this.props
+        const { increasePostVote, decreasePostVote, increaseCommentVote, decreaseCommentVote, removePost, removeComment } = this.props
 
         return (
             <div className="postDetail">
@@ -92,7 +94,7 @@ class PostDetail extends Component {
                                     <img src={editPost} title="Edit Post" className="voteIcon" alt="edit icon" />
                                 </button>
                                 <button className="deletePost" onClick={(e) => this.deletePost(post.id)}>
-                                    <img src={deletePost} title="Delete Post" className="voteIcon" alt="delete icon" />
+                                    <img src={deletePostIcon} title="Delete Post" className="voteIcon" alt="delete icon" />
                                 </button>
                             </span>
                         </div>
@@ -125,7 +127,7 @@ class PostDetail extends Component {
                         {comments.map((comment) => (
                             <div key={comment.id}>
                                 <Comment increaseCommentVote={increaseCommentVote} decreaseCommentVote={decreaseCommentVote}
-                                    onEditComment={this.props.onEditComment} postID={post.id} comment={comment}></Comment>
+                                    removeComment={removeComment} onEditComment={this.props.onEditComment} postID={post.id} comment={comment}></Comment>
                             </div>
                         ))}
                     </div>
@@ -148,9 +150,11 @@ function mapDispatchToProps(dispatch) {
     return {
         increasePostVote: (postID) => dispatch(increasePostVoteScore(postID)),
         decreasePostVote: (postID) => dispatch(decreasePostVoteScore(postID)),
+        removePost: (postID) => dispatch(deletePost(postID)),
         increaseCommentVote: (commentID) => dispatch(increaseCommentVoteScore(commentID)),
         decreaseCommentVote: (commentID) => dispatch(decreaseCommentVoteScore(commentID)),
-        getAllCommentsForPost: (postID) => dispatch(fetchAllComments(postID))
+        getAllCommentsForPost: (postID) => dispatch(fetchAllComments(postID)),
+        removeComment: (commentID) => dispatch(deleteComment(commentID))
     }
 }
 
