@@ -36,7 +36,7 @@ class EditPost extends Component {
     }
 
     render() {
-        const isRedirect = this.props.redirect 
+        const isRedirect = this.props.redirect
         if (isRedirect) {
             return <Redirect push to="/" />;
         }

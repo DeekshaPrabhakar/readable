@@ -50,7 +50,7 @@ class Posts extends Component {
         }
     }
 
-    componentWillMount(){
+    componentWillMount() {
         this.props.updateRedirect()
     }
 
@@ -114,7 +114,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        updateRedirect : () => dispatch(updatePostRedirect())
+        updateRedirect: () => dispatch(updatePostRedirect())
     }
 }
 
