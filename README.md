@@ -7,7 +7,7 @@ This content and comment structure is common across a large number of websites a
 
 ## Walkthrough
 
-[Image coming soon]()
+![Readable Walkthrough](https://github.com/DeekshaPrabhakar/readable/blob/master/public/readable.gif)
 
 ## Project Specifications
 You will start with [local backend development server](https://github.com/udacity/reactnd-project-readable-starter). 
