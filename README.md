@@ -66,4 +66,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ### Acknowledgements:
 - This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 - App Icon made by [Alfredo Hernandez](https://www.flaticon.com/authors/alfredo-hernandez)</a> from [Flaticon](https://www.flaticon.com/) is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/)
-- Themes from [Adobe] (https://color.adobe.com/explore/?filter=most-popular&time=month).
+- Post Edit Icon made by [Pixel Buddha](https://www.flaticon.com/authors/pixel-buddha)</a> from [Flaticon](https://www.flaticon.com/) is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+- Delete Icon made by [Freepik](http://www.freepik.com)</a> from [Flaticon](https://www.flaticon.com/) is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+- Comment Icon made by [Dave Gandy](https://www.flaticon.com/authors/dave-gandy)</a> from [Flaticon](https://www.flaticon.com/) is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+- Vote Icon made by [Gregor Cresnar](https://www.flaticon.com/authors/gregor-cresnar)</a> from [Flaticon](https://www.flaticon.com/) is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+- Vote Icon made by [Chanut is Industries](https://www.flaticon.com/authors/chanut-is-industries)</a> from [Flaticon](https://www.flaticon.com/) is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+- Themes from [Adobe](https://color.adobe.com/explore/?filter=most-popular&time=month).
