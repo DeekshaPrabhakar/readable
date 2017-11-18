@@ -82,13 +82,12 @@ export const removePost = (post) => ({
 
 
 /* update post redirect */
-export const updateRedirectPost = (isRedirect) => dispatch => (
-    dispatch(updatePostRedirect(isRedirect))
+export const updateRedirectPost = () => dispatch => (
+    dispatch(updatePostRedirect())
 )
 
-export const updatePostRedirect = (isRedirectpost) => ({
-    type: UPDATE_POST_REDIRECT,
-    isRedirectpost
+export const updatePostRedirect = () => ({
+    type: UPDATE_POST_REDIRECT
 })
 
 

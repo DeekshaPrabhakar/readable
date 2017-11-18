@@ -294,13 +294,13 @@ button {
 }
 
 
-.tag {
+.editdetails .tag {
   display: inline-block;
-  margin-right: 24px;
+  width: 100px;
 }
 
 
-.tag input[type="checkbox"] {
+.tag input[type="radio"] {
   width: 25px;
   display: inline-block;
 }

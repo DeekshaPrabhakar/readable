@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import * as ReadableAPI from '../ReadableAPI'
 import * as ReadableUtil from '../ReadableUtil'
 import deletePostIcon from '../images/deletePost.png'
 import editPost from '../images/editPost.png'
@@ -140,7 +139,7 @@ class PostDetail extends Component {
 
 function mapStateToProps(state, ownProps) {
     const posts = state.posts
-    const comments = state.comments ? state.comments : comments
+    const comments = state.comments
     return { posts: posts, comments: comments };
 }
 

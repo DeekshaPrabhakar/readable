@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Post from './Post'
 import { connect } from 'react-redux'
+import { updatePostRedirect } from '../actions/postActions'
 
 class Posts extends Component {
 
@@ -47,6 +48,10 @@ class Posts extends Component {
             default:
                 break;
         }
+    }
+
+    componentWillMount(){
+        this.props.updateRedirect()
     }
 
     componentWillReceiveProps(nextProps) {
@@ -107,4 +112,10 @@ function mapStateToProps(state, ownProps) {
 }
 
 
-export default connect(mapStateToProps)(Posts)
+function mapDispatchToProps(dispatch) {
+    return {
+        updateRedirect : () => dispatch(updatePostRedirect())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Posts)

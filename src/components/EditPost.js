@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import serializeForm from 'form-serialize'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router';
-import { createPost, editPost, updatePostRedirect } from '../actions/postActions'
+import { Redirect } from 'react-router'
+import { createPost, editPost } from '../actions/postActions'
 const uuidv1 = require('uuid/v1')
 
 class EditPost extends Component {
@@ -38,11 +38,10 @@ class EditPost extends Component {
     render() {
         const isRedirect = this.props.redirect 
         if (isRedirect) {
-            this.props.updateRedirect(isRedirect)
             return <Redirect push to="/" />;
         }
 
-        const categories = this.state.categories ? this.state.categories : []
+        const categories = this.props.categories ? this.props.categories : []
         const isEdit = this.state.isEdit
         const post = this.state.post
 
@@ -55,8 +54,8 @@ class EditPost extends Component {
                     <textarea name="body" placeholder="Detail" cols="10" rows="5" defaultValue={post.body ? post.body : ""} />
                     <div className="tags">
                         {categories.map((category) => (
-                            <div key={category.name} className="tag">
-                                <input type="checkbox" id={category.name} name="category" value={category.name} defaultChecked={post.category === category.name ? true : false} />
+                            <div className="tag" key={category.name}>
+                                <input id={category.name} type="radio" name="category" value={category.name} defaultChecked={post.category === category.name ? true : false} />
                                 <label htmlFor={category.name}>{category.name}</label>
                             </div>
                         ))}
@@ -85,8 +84,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         createNewPost: (post) => dispatch(createPost(post)),
-        editExistingPost: (post) => dispatch(editPost(post)),
-        updateRedirect : (isRedirect) => dispatch(updatePostRedirect(isRedirect))
+        editExistingPost: (post) => dispatch(editPost(post))
     }
 }
 

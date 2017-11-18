@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import * as ReadableUtil from '../ReadableUtil'
-import * as ReadableAPI from '../ReadableAPI'
 import deleteComment from '../images/deleteComment.png'
 import editComment from '../images/editComment.png'
 import EditComment from './EditComment'
