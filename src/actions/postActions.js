@@ -6,6 +6,7 @@ export const DOWNVOTE_POST = "DOWNVOTE_POST"
 export const DELETE_POST = "DELETE_POST"
 export const CREATE_POST = "CREATE_POST"
 export const EDIT_POST = "EDIT_POST"
+export const UPDATE_POST_REDIRECT = "UPDATE_POST_REDIRECT"
 
 export const RECEIVE_ALL_COMMENTS = "RECEIVE_ALL_COMMENTS"
 export const UPVOTE_COMMENT = "UPVOTE_COMMENT"
@@ -77,6 +78,17 @@ export const deletePost = (postID) => dispatch => (
 export const removePost = (post) => ({
     type: DELETE_POST,
     post
+})
+
+
+/* update post redirect */
+export const updateRedirectPost = (isRedirect) => dispatch => (
+    dispatch(updatePostRedirect(isRedirect))
+)
+
+export const updatePostRedirect = (isRedirectpost) => ({
+    type: UPDATE_POST_REDIRECT,
+    isRedirectpost
 })
 
 

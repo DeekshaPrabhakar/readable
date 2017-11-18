@@ -1,5 +1,5 @@
 import { RECEIVE_ALL_CATEGORIES } from '../actions/categoryAction'
-import { RECEIVE_ALL_POSTS, UPVOTE_POST, DOWNVOTE_POST, DELETE_POST, CREATE_POST, EDIT_POST } from '../actions/postActions'
+import { RECEIVE_ALL_POSTS, UPVOTE_POST, DOWNVOTE_POST, DELETE_POST, CREATE_POST, EDIT_POST, UPDATE_POST_REDIRECT } from '../actions/postActions'
 import { RECEIVE_ALL_COMMENTS, UPVOTE_COMMENT, DOWNVOTE_COMMENT, DELETE_COMMENT, CREATE_COMMENT, EDIT_COMMENT } from '../actions/postActions'
 
 function content(state = { posts: [] }, action) {
@@ -18,6 +18,7 @@ function content(state = { posts: [] }, action) {
             updatedPosts.push(action.post)
             newState = {
                 ...state,
+                redirect: false,
                 posts: updatedPosts
             }
             return newState
@@ -26,6 +27,7 @@ function content(state = { posts: [] }, action) {
             updatedPosts.push(action.post)
             newState = {
                 ...state,
+                redirect: false,
                 posts: updatedPosts
             }
             return newState
@@ -33,6 +35,7 @@ function content(state = { posts: [] }, action) {
             updatedPosts = state.posts.filter(post => post.id !== action.post.id)
             newState = {
                 ...state,
+                redirect: false,
                 posts: updatedPosts
             }
             return newState
@@ -61,6 +64,7 @@ function content(state = { posts: [] }, action) {
             updatedComments.push(action.comment)
             newState = {
                 ...state,
+                redirect: false,
                 comments: updatedComments
             }
             return newState
@@ -69,6 +73,7 @@ function content(state = { posts: [] }, action) {
             updatedComments.push(action.comment)
             newState = {
                 ...state,
+                redirect: false,
                 comments: updatedComments
             }
             return newState
@@ -76,6 +81,7 @@ function content(state = { posts: [] }, action) {
             updatedComments = state.comments.filter(comment => comment.id !== action.comment.id)
             newState = {
                 ...state,
+                redirect: false,
                 comments: updatedComments
             }
             return newState
@@ -84,6 +90,7 @@ function content(state = { posts: [] }, action) {
             updatedComments.push(action.comment)
             newState = {
                 ...state,
+                redirect: false,
                 comments: updatedComments
             }
             return newState
@@ -92,7 +99,14 @@ function content(state = { posts: [] }, action) {
             updatedComments.push(action.comment)
             newState = {
                 ...state,
+                redirect: false,
                 comments: updatedComments
+            }
+            return newState
+        case UPDATE_POST_REDIRECT:
+            newState = {
+                ...state,
+                redirect: false
             }
             return newState
         default:

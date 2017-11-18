@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import serializeForm from 'form-serialize'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router';
-import { createPost, editPost } from '../actions/postActions'
+import { createPost, editPost, updatePostRedirect } from '../actions/postActions'
 const uuidv1 = require('uuid/v1')
 
 class EditPost extends Component {
@@ -11,7 +11,8 @@ class EditPost extends Component {
         categories: this.props.categories,
         isEdit: this.props.isEditingPost,
         post: this.props.post,
-        posts: this.props.allPosts
+        posts: this.props.allPosts,
+        redirect: this.props.redirect
     }
 
     handleSubmit = (e, isEdit, post) => {
@@ -35,8 +36,9 @@ class EditPost extends Component {
     }
 
     render() {
-
-        if (this.props.redirect) {
+        const isRedirect = this.props.redirect 
+        if (isRedirect) {
+            this.props.updateRedirect(isRedirect)
             return <Redirect push to="/" />;
         }
 
@@ -83,7 +85,8 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         createNewPost: (post) => dispatch(createPost(post)),
-        editExistingPost: (post) => dispatch(editPost(post))
+        editExistingPost: (post) => dispatch(editPost(post)),
+        updateRedirect : (isRedirect) => dispatch(updatePostRedirect(isRedirect))
     }
 }
 
