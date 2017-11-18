@@ -27,7 +27,7 @@ button {
 .postDetail,
 .editDiv,
 .no-match {
-  max-width: 80%;
+  max-width: 90%;
   margin: 0 auto;
   padding: 10px;
 }
@@ -85,7 +85,7 @@ button {
 
 .categories {
   display: inline-block;
-  width: 150px;
+  width: 100px;
 }
 
 
