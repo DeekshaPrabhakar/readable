@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 class PostSortControl extends Component {
     render() {
-        const post = this.props.post
         return (
             <div className="sortPosts">
                 <span>Sort By:&nbsp;</span><select onChange={(event) => {

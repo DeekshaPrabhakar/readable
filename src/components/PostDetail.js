@@ -8,9 +8,10 @@ import Comment from './Comment'
 import EditComment from './EditComment'
 import EditPost from './EditPost'
 import { connect } from 'react-redux'
-import { increasePostVoteScore, decreasePostVoteScore, deletePost } from '../actions/postActions'
+import { deletePost } from '../actions/postActions'
 import { fetchAllComments, increaseCommentVoteScore, decreaseCommentVoteScore, deleteComment, createComment, editComment } from '../actions/commentActions'
 import NoMatch from './NoMatch'
+import PostVote from './PostVote'
 
 class PostDetail extends Component {
 
@@ -69,7 +70,7 @@ class PostDetail extends Component {
         }
         const post = this.state.post
         const comments = this.state.comments
-        const { increasePostVote, decreasePostVote, removePost, } = this.props
+        const { removePost } = this.props
         const { increaseCommentVote, decreaseCommentVote, removeComment, createNewComment, editExistingComment } = this.props
 
         return (
@@ -106,23 +107,7 @@ class PostDetail extends Component {
                         <p className="excerpt">
                             {post.body}
                         </p>
-                        <div className="postCategory">
-                            <span className="voteScoreDetail">
-                                <button title="Upvote Post" onClick={() => increasePostVote(post.id)}>
-                                    <span>Upvote</span>{post.voteScore > 0 && (
-                                        <span className="voteScoreLabel">{post.voteScore}</span>
-                                    )}
-                                </button>
-                                <button title="Downvote Post" onClick={() => decreasePostVote(post.id)}>
-                                    <span>Downvote</span>{post.voteScore < 0 && (
-                                        <span className="voteScoreLabel">{post.voteScore}</span>
-                                    )}
-                                </button>
-                            </span>
-                            <span className="category">
-                                {post.category}
-                            </span>
-                        </div>
+                        <PostVote post={post} isPostDetail={true}></PostVote>
                     </div >
                 )}
 
@@ -153,8 +138,6 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        increasePostVote: (postID) => dispatch(increasePostVoteScore(postID)),
-        decreasePostVote: (postID) => dispatch(decreasePostVoteScore(postID)),
         removePost: (postID) => dispatch(deletePost(postID)),
         increaseCommentVote: (commentID) => dispatch(increaseCommentVoteScore(commentID)),
         decreaseCommentVote: (commentID) => dispatch(decreaseCommentVoteScore(commentID)),

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import Post from './Post'
 import PostSortControl from './PostSortControl'
 import { connect } from 'react-redux'
@@ -79,12 +78,7 @@ class Posts extends Component {
                 <div className="postSection">
                     {posts.map((post) => (
                         <div key={post.id} className="post">
-                            <Link to={{
-                                pathname: '/posts/' + post.id.split('-').join(''),
-                                state: { post: post }
-                            }}>
-                                <Post post={post} />
-                            </Link>
+                            <Post post={post} />
                         </div>
                     ))}
                 </div>
