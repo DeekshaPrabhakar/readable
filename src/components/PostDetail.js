@@ -10,19 +10,23 @@ import EditPost from './EditPost'
 import { connect } from 'react-redux'
 import { increasePostVoteScore, decreasePostVoteScore, deletePost } from '../actions/postActions'
 import { fetchAllComments, increaseCommentVoteScore, decreaseCommentVoteScore, deleteComment, createComment, editComment } from '../actions/postActions'
+import NoMatch from './NoMatch'
 
 class PostDetail extends Component {
 
     state = {
         posts: this.props.posts,
         isEditingPost: false,
-        post: this.props.location.state.post,
+        isPostDeleted: (this.props.location.state && this.props.location.state.post) ? false : true,
+        post: this.props.location.state ? this.props.location.state.post : this.props.location.state,
         comments: []
     }
 
     componentDidMount() {
+        if(this.props.location.state && this.props.location.state.post){
         const post = this.props.location.state.post
         this.props.getAllCommentsForPost(post.id)
+        }
     }
 
     toggleEditPost = () => {
@@ -33,7 +37,7 @@ class PostDetail extends Component {
 
     componentWillReceiveProps(nextProps) {
 
-        if (nextProps.posts) {
+        if (nextProps.posts && this.props.location.state && this.props.location.state.post) {
             const postID = this.state.post.id
             let post = nextProps.posts.filter(post => post.id === postID)
             if (post.length > 0) {
@@ -60,12 +64,17 @@ class PostDetail extends Component {
     }
 
     render() {
+        if(this.state.isPostDeleted)
+        {
+            return <NoMatch />
+        }
         const post = this.state.post
         const comments = this.state.comments
         const { increasePostVote, decreasePostVote, removePost, } = this.props
         const { increaseCommentVote, decreaseCommentVote, removeComment, createNewComment, editExistingComment } = this.props
 
         return (
+
             <div className="postDetail">
                 {this.state.isEditingPost && (
                     <EditPost onEditPost={this.props.onEditPost} redirect={false} post={post} categories={this.props.categories} isEditingPost={this.state.isEditingPost} toggleEditPost={this.toggleEditPost} />
