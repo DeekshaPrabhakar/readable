@@ -12,7 +12,7 @@ class Posts extends Component {
     }
 
     updatePosts = (sortBy) => {
-        const posts = this.state.posts
+        const posts = this.props.posts
         switch (sortBy) {
             case "timestampDesc":
                 posts.sort((a, b) => {
@@ -71,7 +71,7 @@ class Posts extends Component {
 
     render() {
         const category = this.props.selectedCategory
-        const posts = category !== "" ? this.state.posts.filter(post => post.category === category) : this.state.posts
+        const posts = category !== "" ? this.props.posts.filter(post => post.category === category) : this.props.posts
 
         return (
             <div className="postsDiv">
@@ -94,10 +94,12 @@ class Posts extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    const posts = state.posts
-    posts.sort((a, b) => {
-        return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
-    })
+    const posts = state.postReducer.posts
+    if (posts) {
+        posts.sort((a, b) => {
+            return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
+        })
+    }
     return { posts: posts };
 }
 

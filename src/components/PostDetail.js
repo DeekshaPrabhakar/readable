@@ -9,7 +9,7 @@ import EditComment from './EditComment'
 import EditPost from './EditPost'
 import { connect } from 'react-redux'
 import { increasePostVoteScore, decreasePostVoteScore, deletePost } from '../actions/postActions'
-import { fetchAllComments, increaseCommentVoteScore, decreaseCommentVoteScore, deleteComment, createComment, editComment } from '../actions/postActions'
+import { fetchAllComments, increaseCommentVoteScore, decreaseCommentVoteScore, deleteComment, createComment, editComment } from '../actions/commentActions'
 import NoMatch from './NoMatch'
 
 class PostDetail extends Component {
@@ -23,9 +23,9 @@ class PostDetail extends Component {
     }
 
     componentDidMount() {
-        if(this.props.location.state && this.props.location.state.post){
-        const post = this.props.location.state.post
-        this.props.getAllCommentsForPost(post.id)
+        if (this.props.location.state && this.props.location.state.post) {
+            const post = this.props.location.state.post
+            this.props.getAllCommentsForPost(post.id)
         }
     }
 
@@ -64,8 +64,7 @@ class PostDetail extends Component {
     }
 
     render() {
-        if(this.state.isPostDeleted)
-        {
+        if (this.state.isPostDeleted) {
             return <NoMatch />
         }
         const post = this.state.post
@@ -147,8 +146,8 @@ class PostDetail extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    const posts = state.posts
-    const comments = state.comments
+    const posts = state.postReducer.posts
+    const comments = state.commentReducer.comments
     return { posts: posts, comments: comments };
 }
 

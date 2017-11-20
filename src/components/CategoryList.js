@@ -42,7 +42,7 @@ class CategoryList extends Component {
     }
 }
 function mapStateToProps(state, ownProps) {
-    const categories = state.categories
+    const categories = state.categoryReducer.categories
     return { categories: categories };
 }
 

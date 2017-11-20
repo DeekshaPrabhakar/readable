@@ -1,6 +1,5 @@
 import * as ReadableAPI from '../ReadableAPI'
-
-export const RECEIVE_ALL_CATEGORIES = "RECEIVE_ALL_CATEGORIES"
+import { RECEIVE_ALL_CATEGORIES } from './types'
 
 export const receiveAllCategories = categories => ({
     type: RECEIVE_ALL_CATEGORIES,

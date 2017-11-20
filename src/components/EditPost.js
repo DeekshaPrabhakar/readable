@@ -74,8 +74,8 @@ class EditPost extends Component {
     }
 }
 function mapStateToProps(state, ownProps) {
-    const categories = state.categories
-    const redirect = state.redirect ? state.redirect : false
+    const categories = state.categoryReducer.categories
+    const redirect = state.postReducer.redirect ? state.postReducer.redirect : false
 
     return { categories: categories, redirect: redirect };
 }
