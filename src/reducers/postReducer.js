@@ -8,6 +8,9 @@ function postReducer(state = { posts: [], redirect: false }, action) {
 
     switch (action.type) {
         case RECEIVE_ALL_POSTS:
+            posts.sort((a, b) => {
+                return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
+            })
             newState = {
                 ...state,
                 posts: posts,

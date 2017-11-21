@@ -89,11 +89,6 @@ class Posts extends Component {
 
 function mapStateToProps(state, ownProps) {
     const posts = state.postReducer.posts
-    if (posts) {
-        posts.sort((a, b) => {
-            return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
-        })
-    }
     return { posts: posts };
 }
 
