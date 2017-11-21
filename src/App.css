@@ -181,7 +181,7 @@ button {
   color: #56b9d0;
   font-weight: bold;
   font-size: 0.8em;
-  text-align: right;
+  text-align: left;
   margin: 10px 10px 0 0;
 }
 
@@ -198,12 +198,28 @@ button {
 
 
 .comment,
-.voteScore  {
+.voteScore,
+.postSummaryEditDelete  {
   text-align: left;
-  width: 33%;
+  width: 20%;
   display: inline-block;
 }
 
+.postSummaryEditDelete  {
+  width: 40%;
+}
+
+.comment {
+  text-align: right;
+}
+
+.postSummaryEditDelete button {
+  color: #56b9d0;
+  font-weight: bold;
+  font-size: 1em;
+  text-align: left;
+  width: 50%;
+}
 
 .comment img {
   vertical-align: middle;
@@ -216,7 +232,7 @@ button {
 }
 
 
-.voteScore img  {
+.voteScore img, .postSummaryEditDelete img  {
   vertical-align: bottom;
   margin-right: 6px;
 }
@@ -229,7 +245,7 @@ button {
 
 .category {
   display: inline-block;
-  width: 33%;
+  width: 20%;
   text-align: right;
   text-transform: uppercase;
 }

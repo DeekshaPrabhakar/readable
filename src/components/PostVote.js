@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { increasePostVoteScore, decreasePostVoteScore } from '../actions/postActions'
-import comment from '../images/comment.png'
 import like from '../images/like.png'
 import dislike from '../images/dislike.png'
 
@@ -12,7 +11,8 @@ class PostVote extends Component {
         const isPostDetail = this.props.isPostDetail
 
         return (
-            <div>
+            <span>
+
                 {isPostDetail && (
                     <span className="voteScoreDetail">
                         <button title="Upvote Post" onClick={() => increasePostVote(post.id)}>
@@ -27,26 +27,21 @@ class PostVote extends Component {
                         </button>
                     </span>
                 )}
+
                 {!isPostDetail && (
-                    <div className="postCategory">
-                        <span className="voteScore">
-                            <button title="Upvote Post" onClick={() => increasePostVote(post.id)}>
-                                <img alt="like icon" src={like} />
-                                <span className="voteScoreLabel">{post.voteScore > 0 ? post.voteScore : 0}</span>
-                            </button>
-                            <button title="Downvote Post" onClick={() => decreasePostVote(post.id)}>
-                                <img alt="like icon" className="dislike" src={dislike} />
-                                <span className="voteScoreLabel">{post.voteScore < 0 ? post.voteScore : 0}</span>
-                            </button>
-                        </span>
-                        <span className="comment">
-                            <img alt="comment icon" src={comment} />{post.commentCount}&nbsp;Comments </span>
-                        <span className="category">
-                            {post.category}
-                        </span>
-                    </div>
+                    <span className="voteScore">
+                        <button title="Upvote Post" onClick={() => increasePostVote(post.id)}>
+                            <img alt="like icon" src={like} />
+                            <span className="voteScoreLabel">{post.voteScore > 0 ? post.voteScore : 0}</span>
+                        </button>
+                        <button title="Downvote Post" onClick={() => decreasePostVote(post.id)}>
+                            <img alt="like icon" className="dislike" src={dislike} />
+                            <span className="voteScoreLabel">{post.voteScore < 0 ? post.voteScore : 0}</span>
+                        </button>
+                    </span>
                 )}
-            </div>
+
+            </span>
         )
     }
 }

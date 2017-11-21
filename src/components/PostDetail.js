@@ -12,6 +12,7 @@ import { deletePost } from '../actions/postActions'
 import { fetchAllComments, increaseCommentVoteScore, decreaseCommentVoteScore, deleteComment, createComment, editComment } from '../actions/commentActions'
 import NoMatch from './NoMatch'
 import PostVote from './PostVote'
+import PostEditDelete from './PostEditDelete'
 
 class PostDetail extends Component {
 
@@ -96,18 +97,18 @@ class PostDetail extends Component {
                                 </span>
                             </span>
                             <span className="postEditControls">
-                                <button className="editPost" onClick={(e) => this.toggleEditPost()}>
-                                    <img src={editPost} title="Edit Post" className="voteIcon" alt="edit icon" />
-                                </button>
-                                <button className="deletePost" onClick={(e) => removePost(post.id)}>
-                                    <img src={deletePostIcon} title="Delete Post" className="voteIcon" alt="delete icon" />
-                                </button>
+                                <PostEditDelete isPostDetail={true} post={post} toggleEditPost={this.toggleEditPost}></PostEditDelete>
                             </span>
                         </div>
                         <p className="excerpt">
                             {post.body}
                         </p>
-                        <PostVote post={post} isPostDetail={true}></PostVote>
+                        <div className="postCategory">
+                            <PostVote post={post} isPostDetail={true}></PostVote>
+                            <span className="category">
+                                {post.category}
+                            </span>
+                        </div>
                     </div >
                 )}
 
