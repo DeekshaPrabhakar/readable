@@ -1,6 +1,6 @@
 import * as ReadableAPI from '../ReadableAPI'
-import { RECEIVE_ALL_COMMENTS, UPVOTE_COMMENT, DOWNVOTE_COMMENT } from './types'
-import { DELETE_COMMENT, CREATE_COMMENT, EDIT_COMMENT } from './types'
+import { RECEIVE_ALL_COMMENTS, UPVOTE_COMMENT, DOWNVOTE_COMMENT } from '../app/actionTypes'
+import { DELETE_COMMENT, CREATE_COMMENT, EDIT_COMMENT } from '../app/actionTypes'
 
 /* fetch all comments */
 export const fetchAllComments = (postID) => dispatch => (

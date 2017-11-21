@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import CategoryList from './CategoryList'
-import Posts from './Posts'
+import CategoryList from '../category/CategoryList'
+import Posts from '../post/Posts'
 
 class Home extends Component {
     render() {

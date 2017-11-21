@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Post from './Post'
 import PostSortControl from './PostSortControl'
 import { connect } from 'react-redux'
-import { updatePostRedirect } from '../actions/postActions'
+import { updatePostRedirect } from './postActions'
 
 class Posts extends Component {
 

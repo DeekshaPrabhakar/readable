@@ -2,14 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import './index.css'
-import App from './components/App'
+import App from './app/App'
 import registerServiceWorker from './registerServiceWorker'
 import { createStore, applyMiddleware, compose } from 'redux'
-import reducer from './reducers/index'
+import reducer from './app/reducers'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
-import { fetchAllPosts } from './actions/postActions'
-import { fetchAllCategories } from './actions/categoryAction'
+import { fetchAllPosts } from './post/postActions'
+import { fetchAllCategories } from './category/categoryAction'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 

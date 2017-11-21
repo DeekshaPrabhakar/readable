@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import serializeForm from 'form-serialize'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
-import { createPost, editPost } from '../actions/postActions'
+import { createPost, editPost } from './postActions'
 const uuidv1 = require('uuid/v1')
 
 class EditPost extends Component {

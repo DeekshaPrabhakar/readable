@@ -4,7 +4,7 @@ import deletePostIcon from '../images/deletePost.png'
 import deletePostSummary from '../images/deletePostSummary.png'
 import editPost from '../images/editPost.png'
 import editPostSummary from '../images/editPostSummary.png'
-import { deletePost } from '../actions/postActions'
+import { deletePost } from './postActions'
 
 class PostEditDelete extends Component {
     render() {

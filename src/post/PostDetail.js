@@ -4,13 +4,13 @@ import deletePostIcon from '../images/deletePost.png'
 import editPost from '../images/editPost.png'
 import profile from '../images/profile.png'
 import user from '../images/user.png'
-import Comment from './Comment'
-import EditComment from './EditComment'
+import Comment from '../comment/Comment'
+import EditComment from '../comment/EditComment'
 import EditPost from './EditPost'
 import { connect } from 'react-redux'
-import { deletePost } from '../actions/postActions'
-import { fetchAllComments, increaseCommentVoteScore, decreaseCommentVoteScore, deleteComment, createComment, editComment } from '../actions/commentActions'
-import NoMatch from './NoMatch'
+import { deletePost } from '../post/postActions'
+import { fetchAllComments, increaseCommentVoteScore, decreaseCommentVoteScore, deleteComment, createComment, editComment } from '../comment/commentActions'
+import NoMatch from '../app/NoMatch'
 import PostVote from './PostVote'
 import PostEditDelete from './PostEditDelete'
 
@@ -54,11 +54,6 @@ class PostDetail extends Component {
 
         if (nextProps.comments) {
             const comments = nextProps.comments
-            if (nextProps.comments.length > 1) {
-                comments.sort((a, b) => {
-                    return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
-                })
-            }
             this.setState({
                 comments: comments
             })

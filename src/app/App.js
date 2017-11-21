@@ -5,8 +5,8 @@ import logo from '../images/logo64.png'
 import pencil from '../images/pencil.png'
 import '../App.css'
 import Home from './Home'
-import PostDetail from './PostDetail'
-import EditPost from './EditPost'
+import PostDetail from '../post/PostDetail'
+import EditPost from '../post/EditPost'
 import NoMatch from './NoMatch'
 
 class App extends Component {

@@ -1,6 +1,6 @@
 import * as ReadableAPI from '../ReadableAPI'
-import { RECEIVE_ALL_POSTS, UPVOTE_POST, DOWNVOTE_POST } from './types'
-import { CREATE_POST, EDIT_POST, DELETE_POST, UPDATE_POST_REDIRECT } from './types'
+import { RECEIVE_ALL_POSTS, UPVOTE_POST, DOWNVOTE_POST } from '../app/actionTypes'
+import { CREATE_POST, EDIT_POST, DELETE_POST, UPDATE_POST_REDIRECT } from '../app/actionTypes'
 
 /* fetch all posts */
 export const fetchAllPosts = () => dispatch => (

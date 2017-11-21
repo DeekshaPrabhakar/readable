@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { increasePostVoteScore, decreasePostVoteScore } from '../actions/postActions'
+import { increasePostVoteScore, decreasePostVoteScore } from './postActions'
 import like from '../images/like.png'
 import dislike from '../images/dislike.png'
 

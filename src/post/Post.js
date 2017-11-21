@@ -6,7 +6,7 @@ import * as ReadableUtil from '../ReadableUtil'
 import PostVote from './PostVote'
 import PostEditDelete from './PostEditDelete'
 import { connect } from 'react-redux'
-import { deletePost } from '../actions/postActions'
+import { deletePost } from './postActions'
 import { Link } from 'react-router-dom'
 import EditPost from './EditPost'
 

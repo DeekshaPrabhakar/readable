@@ -1,4 +1,4 @@
-import { RECEIVE_ALL_CATEGORIES } from '../actions/types'
+import { RECEIVE_ALL_CATEGORIES } from '../app/actionTypes'
 
 function categoryReducer(state = { categories: [] }, action) {
     const { categories } = action

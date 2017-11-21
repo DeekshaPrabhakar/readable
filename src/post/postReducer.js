@@ -1,5 +1,5 @@
-import { RECEIVE_ALL_POSTS, UPVOTE_POST, DOWNVOTE_POST } from '../actions/types'
-import { CREATE_POST, EDIT_POST, DELETE_POST, UPDATE_POST_REDIRECT } from '../actions/types'
+import { RECEIVE_ALL_POSTS, UPVOTE_POST, DOWNVOTE_POST } from '../app/actionTypes'
+import { CREATE_POST, EDIT_POST, DELETE_POST, UPDATE_POST_REDIRECT } from '../app/actionTypes'
 
 function postReducer(state = { posts: [], redirect: false }, action) {
     const { posts } = action
@@ -20,6 +20,9 @@ function postReducer(state = { posts: [], redirect: false }, action) {
         case UPVOTE_POST:
             updatedPosts = state.posts.filter(post => post.id !== action.post.id)
             updatedPosts.push(action.post)
+            updatedPosts.sort((a, b) => {
+                return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
+            })
             newState = {
                 ...state,
                 redirect: false,
@@ -29,6 +32,9 @@ function postReducer(state = { posts: [], redirect: false }, action) {
         case DOWNVOTE_POST:
             updatedPosts = state.posts.filter(post => post.id !== action.post.id)
             updatedPosts.push(action.post)
+            updatedPosts.sort((a, b) => {
+                return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
+            })
             newState = {
                 ...state,
                 redirect: false,
@@ -37,6 +43,9 @@ function postReducer(state = { posts: [], redirect: false }, action) {
             return newState
         case DELETE_POST:
             updatedPosts = state.posts.filter(post => post.id !== action.post.id)
+            updatedPosts.sort((a, b) => {
+                return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
+            })
             newState = {
                 ...state,
                 redirect: false,
@@ -46,6 +55,9 @@ function postReducer(state = { posts: [], redirect: false }, action) {
         case CREATE_POST:
             updatedPosts = state.posts
             updatedPosts.push(action.post)
+            updatedPosts.sort((a, b) => {
+                return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
+            })
             newState = {
                 ...state,
                 posts: updatedPosts,
@@ -55,6 +67,9 @@ function postReducer(state = { posts: [], redirect: false }, action) {
         case EDIT_POST:
             updatedPosts = state.posts.filter(post => post.id !== action.post.id)
             updatedPosts.push(action.post)
+            updatedPosts.sort((a, b) => {
+                return (parseInt(b.voteScore, 10) - parseInt(a.voteScore, 10))
+            })
             newState = {
                 ...state,
                 posts: updatedPosts,
